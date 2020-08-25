@@ -16,6 +16,7 @@
      <th scope="col">sub-sub-category</th>
       <th scope="col">sub-category</th>
       <th scope="col">category</th>
+      
       <th scope="col">actions</th>
      
     </tr>
