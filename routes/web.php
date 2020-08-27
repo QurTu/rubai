@@ -43,10 +43,12 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
      Route::get('admin/sub/subcategory/edit/{subSubCategory}', 'SubSubCategoryController@edit')->name('subsubcategory.edit');
      Route::post('admin/sub/subcategory/update/{subSubCategory}', 'SubSubCategoryController@update')->name('subsubcategory.update');
 
-     //ajax sub-sub-category
+     //ajax get sub-category
      Route::get('get/subcategory/{id}', 'SubSubCategoryController@getSubCategoryNew')->name('get.subcategoryNew');
      Route::get('get/subcategory/{id}/{name}', 'SubSubCategoryController@getSubCategory')->name('get.subcategory');
 
+    //ajax get sub-sub-category
+     Route::get('get/subsubcategory/{id}', 'SubSubCategoryController@getSubSubCategoryNew')->name('get.subsubcategoryNew');
     // Category routes
     Route::get('admin/product', 'ProductController@index')->name('product');
     Route::post('admin/product/add', 'ProductController@add')->name('product.add');

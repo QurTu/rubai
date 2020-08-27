@@ -29,10 +29,15 @@ class SubSubCategoryController extends Controller
         return \Response::json([$data]);
         
        
-
+    
     }
     public function getSubCategoryNew($id) {
         $data[0] = DB::table('sub_categories')->where('category_id', $id)->get();
+        return \Response::json([$data]);
+    }
+
+    public function getSubSubCategoryNew($id) {
+        $data[0] = DB::table('sub_sub_categories')->where('sub_category_id', $id)->get();
         return \Response::json([$data]);
     }
     
