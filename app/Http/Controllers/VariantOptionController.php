@@ -33,10 +33,20 @@ class VariantOptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
-        //
+        $variantOption = new VariantOption();
+        $variantOption->name = $request->name;
+        $variantOption->variant_id = $request->variant_id;
+        $variantOption->save();
+
+        $notification=array(
+            'messege'=>'Old Password matched!',
+            'alert-type'=>'success'
+             );
+        return redirect()->back()->with($notification);
     }
+    
 
     /**
      * Display the specified resource.

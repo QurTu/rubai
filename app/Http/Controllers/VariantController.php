@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Variant;
+use App\VariantOption;
 use Illuminate\Http\Request;
 
 class VariantController extends Controller
@@ -13,9 +14,12 @@ class VariantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        //
+        $variants = Variant::all();
+        return view('admin.variant.variant',  ['variants' => $variants]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -33,9 +37,17 @@ class VariantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
-        //
+        $variant = new Variant();
+        $variant->name = $request->name;
+        $variant->save();
+
+        $notification=array(
+            'messege'=>'Old Password matched!',
+            'alert-type'=>'success'
+             );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -56,8 +68,9 @@ class VariantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Variant $variant)
-    {
-        //
+    { 
+        $variantOptions =  VariantOption::where('variant_id', $variant->id)->get();
+        return view('.admin.variant.edit' , compact('variant', 'variantOptions'));
     }
 
     /**
@@ -69,7 +82,14 @@ class VariantController extends Controller
      */
     public function update(Request $request, Variant $variant)
     {
-        //
+        $variant->name = $variant->name;
+        $variant->save();
+
+        $notification=array(
+            'messege'=>'Old Password matched!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->route('variant')->with($notification);
     }
 
     /**
@@ -78,8 +98,10 @@ class VariantController extends Controller
      * @param  \App\Variant  $variant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Variant $variant)
+    public function delete(Variant $variant)
     {
-        //
+        $variant->delete();
+        return redirect()->route('variant');
     }
+    
 }

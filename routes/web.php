@@ -51,14 +51,24 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
 
     //ajax get sub-sub-category
      Route::get('get/subsubcategory/{id}', 'SubSubCategoryController@getSubSubCategoryNew')->name('get.subsubcategoryNew');
-    // Category routes
+    // product routes
     Route::get('admin/product', 'ProductController@index')->name('product');
     Route::post('admin/product/add', 'ProductController@add')->name('product.add');
     Route::post('admin/product/delete/{product}', 'ProductController@delete')->name('product.delete');
     Route::get('admin/product/edit/{product}', 'ProductController@edit')->name('product.edit');
     Route::post('admin/product/update/{product}', 'ProductController@update')->name('product.update');
-
-    
+    // variant routes
+    Route::get('admin/variant', 'VariantController@index')->name('variant');
+    Route::post('admin/variant/add', 'VariantController@add')->name('variant.add');
+    Route::post('admin/variant/delete/{variant}', 'VariantController@delete')->name('variant.delete');
+    Route::get('admin/variant/edit/{variant}', 'VariantController@edit')->name('variant.edit');
+    Route::post('admin/variant/update/{variant}', 'VariantController@update')->name('variant.update');
+    //variant_options toutes
+    Route::get('admin/variant/options', 'VariantOptionController@index')->name('variant.options');
+    Route::post('admin/variant/options/add', 'VariantOptionController@add')->name('variant.options.add');
+    Route::post('admin/variant/options/delete/{variant}', 'VariantOptionController@delete')->name('variant.options.delete');
+    Route::get('admin/variant/options/edit/{variant}', 'VariantOptionController@edit')->name('variant.options.edit');
+    Route::post('admin/variant/options/update/{variant}', 'VariantOptionController@update')->name('variant.options.update');
 
      
      
