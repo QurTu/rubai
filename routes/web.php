@@ -46,6 +46,8 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
      //ajax get sub-category
      Route::get('get/subcategory/{id}', 'SubSubCategoryController@getSubCategoryNew')->name('get.subcategoryNew');
      Route::get('get/subcategory/{id}/{name}', 'SubSubCategoryController@getSubCategory')->name('get.subcategory');
+     Route::get('get/subcategory/product/{id}/{name}', 'SubSubCategoryController@getSubCategoryP')->name('get.subcategory.product');
+     Route::get('get/subsubcategory/product/{id}/{name}', 'SubSubCategoryController@getSubSubCategory')->name('get.subsubcategory.product');
 
     //ajax get sub-sub-category
      Route::get('get/subsubcategory/{id}', 'SubSubCategoryController@getSubSubCategoryNew')->name('get.subsubcategoryNew');

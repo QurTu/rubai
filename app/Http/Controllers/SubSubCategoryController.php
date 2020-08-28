@@ -25,17 +25,30 @@ class SubSubCategoryController extends Controller
     public function getSubCategory($id, $name) {
         $data[0] = DB::table('sub_categories')->where('category_id', $id)->get();
         $data[1] = DB::table('sub_sub_categories')->where('name', $name)->first();
-
         return \Response::json([$data]);
-        
-       
-    
     }
+
+
+    //for poduct
+    public function getSubCategoryP($id, $name) {
+        $data[0] = DB::table('sub_categories')->where('category_id', $id)->get();
+        $data[1] = DB::table('products')->where('name', $name)->first();
+        return $data;
+      //  return \Response::json([$data]);
+    }
+    //for product
+    public function getSubSubCategory($id, $name) {
+        $data[0] = DB::table('sub_sub_categories')->where('sub_category_id', $id)->get();
+        $data[1] = DB::table('products')->where('name', $name)->first();
+        return \Response::json([$data]);
+    }
+
+
     public function getSubCategoryNew($id) {
         $data[0] = DB::table('sub_categories')->where('category_id', $id)->get();
         return \Response::json([$data]);
     }
-
+    //for product
     public function getSubSubCategoryNew($id) {
         $data[0] = DB::table('sub_sub_categories')->where('sub_category_id', $id)->get();
         return \Response::json([$data]);

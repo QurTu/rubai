@@ -79,15 +79,12 @@
      $('select[name="category_id"]').on('change',function(){
           let category_id = $(this).val();
           let name =  $('input[name="name"]').val();
-          console.log(name);
           if (category_id) {
             $.ajax({
               url: "{{ url('/get/subcategory') }}/"+category_id + "/" + name,
               type:"GET",
               dataType:"json",
               success:function(data) { 
-                console.log(data);
-                console.log('suveikiu');
               var d =$('select[name="subcategory_id"]').empty();
               
               $.each(data[0][0], function(key, value){

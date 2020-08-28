@@ -75,12 +75,6 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
       
         
-        
-
-
-        
-
-        
     }
 
     /**
@@ -102,7 +96,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return $product;
+        $categories = Category::all();
+        return view('admin.product.edit', \compact('product','categories' ));
     }
 
     /**
@@ -113,8 +108,35 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
+    
     {
-        //
+        $product->name = $request->name;
+        $product->discription = $request->decreption;
+        $product->status = 1;
+        $product->category_id = $request->category_id;
+        $product->sub_category_id = $request->subcategory_id;
+        $product->sub_sub_category_id = $request->sub_subcategory_id;
+
+        
+        if ($request->hasFile('image')) {
+                 $image_full_name = $product->image;
+                 $uplode_path = public_path("images\\");
+                 $image_url =$uplode_path . $image_full_name;
+                 unlink($image_url);
+            $ext =  $request->file('image')->getClientOriginalName();
+            $image_name = date('dmy_H_s_i');
+            $image_full_name = $image_name . '.' .$ext;
+            $uplode_path = public_path("images\\");
+            $image_url =$uplode_path . $image_full_name;
+              $request->image->move($uplode_path, $image_full_name);
+            $product->image = $image_full_name;
+        }
+        $product->save();
+        $notification=array(
+            'messege'=>'Old Password matched!',
+            'alert-type'=>'success'
+             );
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -123,8 +145,14 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function delete(Product $product)
     {
-        //
+        $image_full_name = $product->image;
+        $uplode_path = public_path("images\\");
+        $image_url =$uplode_path . $image_full_name;
+        unlink($image_url);
+        $product->delete();
+        return redirect()->back();
+       
     }
 }
