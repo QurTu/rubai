@@ -73,4 +73,5 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
     // variantOption routes
     Route::post('admin/productVariant/add', 'ProductVariantController@add')->name('productVariant.store');
     Route::post('admin/productVariant/delete/{productVariant}', 'ProductVariantController@delete')->name('productVariant.delete');
+    Route::get('admin/productVariant/edit/{productVariant}', 'ProductVariantController@edit')->name('productVariant.edit');
     

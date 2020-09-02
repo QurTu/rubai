@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\ProductVariant;
+use App\VariantOption;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductVariantController extends Controller
 {
@@ -65,7 +67,15 @@ class ProductVariantController extends Controller
      */
     public function edit(ProductVariant $productVariant)
     {
-        //
+
+        $productVar = DB::table('product_variants')
+        ->join('products', 'products.id', '=' ,'product_variants.product_id')
+        ->join('variants', 'variants.id', '=' , 'product_variants.variant_id')
+        ->select('product_variants.*', 'variants.name as variant_name' , 'products.name as product_name')
+        ->where('product_variants.id', $productVariant->id )
+        ->get();
+        $variantOptions = VariantOption::where('variant_id', $productVariant->variant_id )->get();
+        return view('admin.product.variantOption' , compact('productVar', 'variantOptions'));
     }
 
     /**

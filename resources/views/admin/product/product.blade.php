@@ -5,7 +5,7 @@
 <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Prideti nauja produkta
+  Prideti nauja savybes
 </button>
       </nav>
    

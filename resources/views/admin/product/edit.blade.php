@@ -56,6 +56,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
+      <th scope="col">List</th>
       <th scope="col">actions</th>
      
     </tr>
@@ -64,11 +65,16 @@
   @foreach($productVariants as $productVariant)
     <tr>
       <th scope="row">{{$productVariant['variant_name']}}</th>
+      <th scope="row">{{$productVariant['variant_name']}}</th>
       <td>
       <form action="{{route('productVariant.delete',  [$productVariant['id'] ])}}" method="post">
       @csrf
       <button type="submit">Delete</button>
       </form>
+      <form action="{{route('productVariant.edit',  [$productVariant['id'] ])}}" method="get">
+      <button type="submit">Edit</button>
+      </form>
+      
       </td>
     </tr>
     @endforeach
@@ -102,6 +108,7 @@
       @csrf
       <button type="submit">Delete</button>
       </form>
+      
       </td>
     </tr>
     @endforeach
@@ -109,6 +116,8 @@
   </tbody>
 </table>
 </div>
+
+
 
 <!-- add variation Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
