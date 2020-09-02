@@ -66,9 +66,11 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
     //variant_options toutes
     Route::get('admin/variant/options', 'VariantOptionController@index')->name('variant.options');
     Route::post('admin/variant/options/add', 'VariantOptionController@add')->name('variant.options.add');
-    Route::post('admin/variant/options/delete/{variant}', 'VariantOptionController@delete')->name('variant.options.delete');
-    Route::get('admin/variant/options/edit/{variant}', 'VariantOptionController@edit')->name('variant.options.edit');
-    Route::post('admin/variant/options/update/{variant}', 'VariantOptionController@update')->name('variant.options.update');
+    Route::post('admin/variant/options/delete/{variantOption}', 'VariantOptionController@delete')->name('variant.options.delete');
+    Route::get('admin/variant/options/edit/{variantOption}', 'VariantOptionController@edit')->name('variant.options.edit');
+    Route::post('admin/variant/options/update/{variantOption}', 'VariantOptionController@update')->name('variant.options.update');
 
-     
-     
+    // variantOption routes
+    Route::post('admin/productVariant/add', 'ProductVariantController@add')->name('productVariant.store');
+    Route::post('admin/productVariant/delete/{productVariant}', 'ProductVariantController@delete')->name('productVariant.delete');
+    

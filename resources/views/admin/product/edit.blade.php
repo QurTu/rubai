@@ -36,7 +36,6 @@
             </select></div>
         </div>
     </div>
-    <div class="col">Column</div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">prideti</button>
@@ -44,6 +43,107 @@
       </div>
 </div>
 </div>
+
+<div class="sl-mainpanel">
+      <nav class="breadcrumb sl-breadcrumb">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Prideti nauja savybe
+</button>
+      </nav>
+   
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">actions</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+  @foreach($productVariants as $productVariant)
+    <tr>
+      <th scope="row">{{$productVariant['variant_name']}}</th>
+      <td>
+      <form action="{{route('productVariant.delete',  [$productVariant['id'] ])}}" method="post">
+      @csrf
+      <button type="submit">Delete</button>
+      </form>
+      </td>
+    </tr>
+    @endforeach
+    
+  </tbody>
+</table>
+</div>
+
+<div class="sl-mainpanel">
+      <nav class="breadcrumb sl-breadcrumb">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Prideti nauja savybiu variacija
+</button>
+      </nav>
+   
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">actions</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+  @foreach($productVariants as $productVariant)
+    <tr>
+      <th scope="row">{{$productVariant['variant_name']}}</th>
+      <td>
+      <form action="{{route('productVariant.delete',  [$productVariant['id'] ])}}" method="post">
+      @csrf
+      <button type="submit">Delete</button>
+      </form>
+      </td>
+    </tr>
+    @endforeach
+    
+  </tbody>
+</table>
+</div>
+
+<!-- add variation Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Prideti nauja kategorija</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group"> 
+          <form action="{{route('productVariant.store')}}" method='post'>  
+          @csrf   
+      <input type="hidden" name="product_id" value="{{$product->id}}">
+            <label >  Savybe  </label> 
+           <select name="variant_id" >
+               @foreach ($variants as $variant)
+                  <option value="{{$variant->id}}">{{$variant->name}} </option>
+                @endforeach
+          </select> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">prideti</button>
+        </form>
+      </div>
+          </div>
+     
+    </div>
+  </div>
+</div>
+
+
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
@@ -75,9 +175,6 @@
                 else {
                   $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.name + '</option>');
                 }
-
-
-            
               });
               },
             }).done( function(){

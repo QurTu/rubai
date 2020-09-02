@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\Variant;
+use App\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -95,9 +97,20 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
-    {
+    {   
+        
         $categories = Category::all();
-        return view('admin.product.edit', \compact('product','categories' ));
+        $variants = Variant::all();
+        $productVariants = DB::table('product_variants')
+        ->join('products', 'products.id', '=' ,'product_variants.product_id')
+        ->join('variants', 'variants.id', '=' ,'product_variants.variant_id')
+        ->select('product_variants.*', 'products.name as product_name' , 'variants.name as variant_name')
+        ->where('product_id', $product->id)
+        ->get();
+        $productVariants= json_decode( json_encode($productVariants), true);
+     
+
+        return view('admin.product.edit', \compact('product','categories', 'productVariants', 'variants' ));
     }
 
     /**

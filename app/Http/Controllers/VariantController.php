@@ -82,7 +82,7 @@ class VariantController extends Controller
      */
     public function update(Request $request, Variant $variant)
     {
-        $variant->name = $variant->name;
+        $variant->name = $request->name;
         $variant->save();
 
         $notification=array(

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\VariantOption;
+use App\ProductVariantOption;
 use Illuminate\Http\Request;
 
-class VariantOptionController extends Controller
+class ProductVariantOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,28 +33,18 @@ class VariantOptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function add(Request $request)
+    public function store(Request $request)
     {
-        $variantOption = new VariantOption();
-        $variantOption->name = $request->name;
-        $variantOption->variant_id = $request->variant_id;
-        $variantOption->save();
-
-        $notification=array(
-            'messege'=>'Old Password matched!',
-            'alert-type'=>'success'
-             );
-        return redirect()->back()->with($notification);
+        //
     }
-    
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\VariantOption  $variantOption
+     * @param  \App\ProductVariantOption  $productVariantOption
      * @return \Illuminate\Http\Response
      */
-    public function show(VariantOption $variantOption)
+    public function show(ProductVariantOption $productVariantOption)
     {
         //
     }
@@ -62,10 +52,10 @@ class VariantOptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\VariantOption  $variantOption
+     * @param  \App\ProductVariantOption  $productVariantOption
      * @return \Illuminate\Http\Response
      */
-    public function edit(VariantOption $variantOption)
+    public function edit(ProductVariantOption $productVariantOption)
     {
         //
     }
@@ -74,10 +64,10 @@ class VariantOptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\VariantOption  $variantOption
+     * @param  \App\ProductVariantOption  $productVariantOption
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VariantOption $variantOption)
+    public function update(Request $request, ProductVariantOption $productVariantOption)
     {
         //
     }
@@ -85,12 +75,11 @@ class VariantOptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\VariantOption  $variantOption
+     * @param  \App\ProductVariantOption  $productVariantOption
      * @return \Illuminate\Http\Response
      */
-    public function delete(VariantOption $variantOption)
+    public function destroy(ProductVariantOption $productVariantOption)
     {
-        $variantOption->delete();
-        return redirect()->back();
+        //
     }
 }
