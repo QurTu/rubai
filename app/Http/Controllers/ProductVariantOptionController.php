@@ -33,9 +33,14 @@ class ProductVariantOptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
-        //
+        $productVariantOption = new  ProductVariantOption();
+        $productVariantOption->product_variant_id = $request->productVariant_id;
+        $productVariantOption->name = $request->variant_name;
+        $productVariantOption->save();
+        return \redirect()->back();
+
     }
 
     /**
@@ -78,8 +83,9 @@ class ProductVariantOptionController extends Controller
      * @param  \App\ProductVariantOption  $productVariantOption
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductVariantOption $productVariantOption)
+    public function delete(ProductVariantOption $productVariantOption)
     {
-        //
+        $productVariantOption->delete();
+        return \redirect()->back();
     }
 }

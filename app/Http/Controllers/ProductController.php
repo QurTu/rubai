@@ -107,9 +107,9 @@ class ProductController extends Controller
         ->select('product_variants.*', 'products.name as product_name' , 'variants.name as variant_name')
         ->where('product_id', $product->id)
         ->get();
+        
         $productVariants= json_decode( json_encode($productVariants), true);
-     
-
+        
         return view('admin.product.edit', \compact('product','categories', 'productVariants', 'variants' ));
     }
 

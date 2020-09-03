@@ -20,16 +20,19 @@
     </tr>
   </thead>
   <tbody>
-  <form action="" method="post">
+  
+  @foreach( $productVariantOptions  as $productVariantOption  )
     <tr>
-      <th scope="row">  </th>
+      <th scope="row"> {{$productVariantOption->name}} </th>
       <td>
+      <form action="{{route('productVariantOption.delete', [$productVariantOption])}}" method="post">
       @csrf
-      <button type="submit">Change name</button>
-      
+      <button type="submit">delete</button>
+      </form>
       </td>
     </tr>
-    </form>
+    @endforeach
+    
    
     
   </tbody>
@@ -48,13 +51,13 @@
       </div>
       <div class="modal-body">
       <div class="form-group"> 
-          <form action="{{route('productVariant.store')}}" method='post'>  
-          @csrf   
-      <input type="hidden" name="product_id" value="">
+          <form action="{{route('productVariantOption.store')}}" method='post'>  
+          @csrf    
+      <input type="hidden" name="productVariant_id" value="{{$productVar[0]->id}}">
             <label >  Savybe  </label> 
-           <select name="variant_id" >
+           <select name="variant_name" >
                @foreach ($variantOptions as $variantOption)
-                  <option value="{{$variantOption->id}}">{{$variantOption->name}} </option>
+                  <option value="{{$variantOption->name}}">{{$variantOption->name}} </option>
                 @endforeach
           </select> 
       </div>

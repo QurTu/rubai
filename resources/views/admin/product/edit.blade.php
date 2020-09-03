@@ -83,14 +83,14 @@
 </table>
 </div>
 
+
+<!-- unique porduct -->
 <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Prideti nauja savybiu variacija
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUniqueProduct">
+  Prideti nauja unikalu produkta
 </button>
       </nav>
-   
-
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -102,7 +102,7 @@
   <tbody>
   @foreach($productVariants as $productVariant)
     <tr>
-      <th scope="row">{{$productVariant['variant_name']}}</th>
+      <th scope="row">{{$productVariant['variant_name']}} </th>
       <td>
       <form action="{{route('productVariant.delete',  [$productVariant['id'] ])}}" method="post">
       @csrf
@@ -152,6 +152,53 @@
   </div>
 </div>
 
+<!-- add unique product Modal -->
+<div class="modal fade" id="addUniqueProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Prideti nauja unikalu produkta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group"> 
+          <form action="{{route('uniqueProduct.store')}}" method='post'>  
+          @csrf   
+          <input type="hidden" name="product_id" value="{{$product->id}}">
+          @php
+          $number = "var_id";
+          foreach($productVariants as $productVariant ) {
+          $productVariantOptions = DB::table('product_variant_options')->where('product_variant_id', $productVariant['id'] )->get();
+            echo "<label >" . $productVariant['variant_name']  .  " </label> 
+            <select name='{$number}' > " ;
+            $number = 'koja';
+            foreach( $productVariantOptions  as $PVO  ) {
+              echo "<option value='{$PVO->id}'>{$PVO->name} </option>";
+            }
+              echo " </select> ";
+              $number = 'var1_id';
+          }
+          @endphp
+              <br>
+              <br>
+              <br>
+              Kaina: <input type="text" name="price" >
+              Kiekis: <input type="number" name="qnt" >
+      
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">prideti</button>
+        </form>
+      </div>
+          </div>
+     
+    </div>
+  </div>
+</div>
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

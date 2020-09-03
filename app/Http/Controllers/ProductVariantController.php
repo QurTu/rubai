@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProductVariant;
 use App\VariantOption;
+use App\ProductVariantOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -75,7 +76,8 @@ class ProductVariantController extends Controller
         ->where('product_variants.id', $productVariant->id )
         ->get();
         $variantOptions = VariantOption::where('variant_id', $productVariant->variant_id )->get();
-        return view('admin.product.variantOption' , compact('productVar', 'variantOptions'));
+        $productVariantOptions = ProductVariantOption::where('product_variant_id', $productVariant->id)->get();
+        return view('admin.product.variantOption' , compact('productVar', 'variantOptions' ,'productVariantOptions'));
     }
 
     /**

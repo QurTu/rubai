@@ -75,3 +75,9 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
     Route::post('admin/productVariant/delete/{productVariant}', 'ProductVariantController@delete')->name('productVariant.delete');
     Route::get('admin/productVariant/edit/{productVariant}', 'ProductVariantController@edit')->name('productVariant.edit');
     
+    
+    // ProductVariantOption routes
+    Route::post('admin/ProductVariantOption/add', 'ProductVariantOptionController@add')->name('productVariantOption.store');
+    Route::post('admin/ProductVariantOption/delete/{productVariantOption}', 'ProductVariantOptionController@delete')->name('productVariantOption.delete');
+    //unique product
+    Route::post('admin/uniqueProduct/add', 'UniqueProductController@add')->name('uniqueProduct.store');
