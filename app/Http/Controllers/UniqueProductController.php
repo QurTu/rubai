@@ -34,8 +34,16 @@ class UniqueProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add(Request $request)
-    {
-        return $request;
+    {   
+       
+        $uniqeProduct = new UniqueProduct();
+        $uniqeProduct->product_id = $request->product_id;
+        $uniqeProduct->variants = json_encode($request->variants);
+        $uniqeProduct->price = $request->price;
+        $uniqeProduct->qnt = $request->qnt;
+        $uniqeProduct->save();
+
+        return \redirect()->back();
     }
 
     /**

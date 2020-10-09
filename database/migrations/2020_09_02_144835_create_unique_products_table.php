@@ -17,12 +17,7 @@ class CreateUniqueProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            // option1
-            $table->unsignedBigInteger('product_variant_option1_id');
-            $table->foreign('product_variant_option1_id')->references('id')->on('product_variant_options');
-           // option2 
-            $table->unsignedBigInteger('product_variant_option2_id');
-            $table->foreign('product_variant_option2_id')->references('id')->on('product_variant_options');
+           $table->json('variants');
             $table->decimal('price', 8, 2);
             $table->integer('qnt');
             $table->timestamps();

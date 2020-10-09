@@ -167,18 +167,19 @@
           <form action="{{route('uniqueProduct.store')}}" method='post'>  
           @csrf   
           <input type="hidden" name="product_id" value="{{$product->id}}">
+
+       
+
           @php
-          $number = "var_id";
           foreach($productVariants as $productVariant ) {
           $productVariantOptions = DB::table('product_variant_options')->where('product_variant_id', $productVariant['id'] )->get();
             echo "<label >" . $productVariant['variant_name']  .  " </label> 
-            <select name='{$number}' > " ;
+            <select name='variants[]' > " ;
             $number = 'koja';
             foreach( $productVariantOptions  as $PVO  ) {
-              echo "<option value='{$PVO->id}'>{$PVO->name} </option>";
+              echo "<option value='{$PVO->name}'>{$PVO->name} </option>";
             }
-              echo " </select> ";
-              $number = 'var1_id';
+              echo " </select> ";  
           }
           @endphp
               <br>
