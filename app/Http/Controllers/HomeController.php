@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SubSubCategory;
+use App\SubCategory;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -20,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.frontend');
+        $subSubCategories = SubSubCategory::all();
+        $subCategories = SubCategory::all();
+        $categories = Category::all();
+        return view('layouts.frontend', \compact('categories','subCategories', 'subSubCategories' ));
     }
 }
