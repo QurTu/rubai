@@ -11,6 +11,7 @@
         <form action="{{route('product.update' , [$product])}}"  method='post' enctype="multipart/form-data">   
         @csrf
         <label for="product_name"> Produkto pavadinimas:  </label>
+        Kaina: <input value='{{$product->price}}' type="text" name="price" >
         <input type="text" name="name" id='product_name' value="{{$product->name}}" > <br>
         <label for="decreption"> Produkto aprasymas: </label>
         <textarea  id="summernote" name="decreption" > {{$product->discription}}</textarea> <br>
@@ -185,7 +186,6 @@
               <br>
               <br>
               <br>
-              Kaina: <input type="text" name="price" >
               Kiekis: <input type="number" name="qnt" >
       
         

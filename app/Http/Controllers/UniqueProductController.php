@@ -39,7 +39,6 @@ class UniqueProductController extends Controller
         $uniqeProduct = new UniqueProduct();
         $uniqeProduct->product_id = $request->product_id;
         $uniqeProduct->variants = json_encode($request->variants);
-        $uniqeProduct->price = $request->price;
         $uniqeProduct->qnt = $request->qnt;
         $uniqeProduct->save();
 

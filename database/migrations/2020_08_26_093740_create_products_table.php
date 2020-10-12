@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('discription');
             $table->string('image');
             $table->integer('status');
+            $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('sub_category_id');

@@ -18,7 +18,6 @@ class CreateUniqueProductsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
            $table->json('variants');
-            $table->decimal('price', 8, 2);
             $table->integer('qnt');
             $table->timestamps();
         });

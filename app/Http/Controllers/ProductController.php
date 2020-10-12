@@ -53,6 +53,7 @@ class ProductController extends Controller
       
         $product = new Product();
         $product->name = $request->name;
+        $product->price = $request->price;
         $product->discription = $request->decreption;
         $product->status = 1;
         $product->category_id = $request->category_id;
@@ -125,6 +126,7 @@ class ProductController extends Controller
     {
         $product->name = $request->name;
         $product->discription = $request->decreption;
+        $product->price = $request->price;
         $product->status = 1;
         $product->category_id = $request->category_id;
         $product->sub_category_id = $request->subcategory_id;

@@ -15,6 +15,7 @@
     <tr>
       <th scope="col">id</th>
       <th scope="col">Name</th>
+      <th scope="col">Price</th>
       <th scope="col">image</th>
       <th scope="col">category</th>
       <th scope="col">sub-category</th>
@@ -28,6 +29,7 @@
     <tr>
       <td scope="row">{{$product['id']}}</td>
       <td scope="row">{{$product['name']}}</td>
+      <td scope="row">{{$product['price']}}</td>
       <td img style="height:100px;width:120px;" scope="row"><img style="height:80px;width:120px;" src="{{asset('images/' . $product['image'])}}" alt=""> </td>
       <td scope="row">{{$product['category_name']}}</td>
       <td scope="row">{{$product['sub_category_name']}}</td> 
@@ -64,6 +66,8 @@
         @csrf
         <label for="product_name"> Produkto pavadinimas:  </label>
         <input type="text" name="name" id='product_name' > <br>
+        <label for="product_price"> Produkto kaina:  </label>
+        <input type="number" step="0.01" min='0' name="price" id='product_price' > <br>
         <label for="decreption"> Produkto aprasymas: </label>
         <textarea  id="summernote" name="decreption"></textarea> <br>
         <label for="image"> Nuotrauka:  </label>
