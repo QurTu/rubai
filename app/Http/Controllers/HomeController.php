@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\SubSubCategory;
 use App\SubCategory;
 use App\Category;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,12 @@ class HomeController extends Controller
         $subSubCategories = SubSubCategory::all();
         $subCategories = SubCategory::all();
         $categories = Category::all();
-        return view('layouts.frontend', \compact('categories','subCategories', 'subSubCategories' ));
+        $categoriesWithProducts = Category::all()->take(2);
+        foreach($categoriesWithProducts as $categorie) {
+          $categorie =  $categorie->products;
+        }
+       
+        return view('layouts.frontend', \compact('categories','subCategories', 'subSubCategories', 'categoriesWithProducts' ));
     }
 
 
