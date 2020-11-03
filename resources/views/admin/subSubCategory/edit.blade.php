@@ -52,8 +52,6 @@
       $(document).ready(function(){
         let category_id =  $('select[name="category_id"]').val();
         let name =  $('input[name="name"]').val();
-        console.log(name);
-        console.log(category_id);
           if (category_id) {
             $.ajax({
               url: "{{ url('/get/subcategory') }}/"+category_id + "/" + name,
@@ -64,7 +62,6 @@
               $.each(data[0][0], function(key, value){
                 
                 if(data[0][1].sub_category_id == value.id) {
-                  console.log('suveikiu');
               $('select[name="subcategory_id"]').append('<option value="'+ value.id + '" selected>' + value.name + '</option>');
                }
                 else {
@@ -95,8 +92,6 @@
               },
             });
 
-          }else{
-            alert('danger');
           }
 
             });

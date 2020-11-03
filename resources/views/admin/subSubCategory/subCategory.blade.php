@@ -104,14 +104,12 @@
           }
      $('select[name="category_id"]').on('change',function(){
           var category_id = $(this).val();
-          console.log(category_id);
           if (category_id) {
             $.ajax({
               url: "{{ url('/get/subcategory') }}/"+category_id  ,
               type:"GET",
               dataType:"json",
               success:function(data) { 
-                console.log(data);
               var d =$('select[name="subcategory_id"]').empty();
               
               $.each(data[0][0], function(key, value){

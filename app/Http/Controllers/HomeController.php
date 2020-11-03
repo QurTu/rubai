@@ -7,6 +7,7 @@ use App\SubSubCategory;
 use App\SubCategory;
 use App\Category;
 use App\Product;
+use Cart;
 
 class HomeController extends Controller
 {
@@ -45,12 +46,26 @@ class HomeController extends Controller
     }
 
     public function cart()
-    {
+    {   
+        $cart = Cart::instance('shopping')->content();
         $subSubCategories = SubSubCategory::all();
         $subCategories = SubCategory::all();
         $categories = Category::all();
-        return view('front-end.cart', \compact('categories','subCategories', 'subSubCategories' ));
+        return view('front-end.cart', \compact('categories','subCategories', 'subSubCategories', 'cart' ));
     }
+
+    
+    public function wishlist()
+    {   
+        $cart = Cart::instance('wishlist')->content();
+        $subSubCategories = SubSubCategory::all();
+        $subCategories = SubCategory::all();
+        $categories = Category::all();
+        return view('front-end.wishlist', \compact('categories','subCategories', 'subSubCategories', 'cart' ));
+    }
+
+
+
     public function shop()
     {
         $subSubCategories = SubSubCategory::all();
@@ -67,6 +82,20 @@ class HomeController extends Controller
     }
 
 
+    public function search() {
+        
+    }
+
+    public function searchCat() {
+        
+    }
+    public function searchSubCat() {
+        
+    }
+    public function searchSubSubCatcontact() {
+        
+    }
+    
 
 }
 

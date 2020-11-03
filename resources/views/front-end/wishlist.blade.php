@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-lg-10 offset-lg-1">
 					<div class="cart_container">
-						<div class="cart_title">Shopping Cart</div>
+						<div class="cart_title">Wish List</div>
 						<div class="cart_items">
 							<ul class="cart_list">
 
@@ -21,25 +21,16 @@
 											<div class="cart_item_text"> {{$item->name}}</div>
 											
 										</div>
-										<div class="cart_item_color cart_info_col">
-											<div class="cart_item_title">Color</div>
-											<div class="cart_item_text"><span style="background-color:#999999;"></span>Silver</div>
-										</div>
-										<div class="cart_item_quantity cart_info_col">
-											<div class="cart_item_title">Quantity</div>
-											<div class="cart_item_text"> {{$item->qty}}</div>
-										</div>
+										
+										
 										<div class="cart_item_price cart_info_col">
 											<div class="cart_item_title">Price</div>
 											<div class="cart_item_text">{{$item->price}}</div>
 										</div>
-										<div class="cart_item_total cart_info_col">
-											<div class="cart_item_title">Total</div>
-											<div class="cart_item_text">{{$item->price * $item->qty}}</div>
-										</div>
+										
 										<div class="cart_item_quantity cart_info_col">
 											<div class="cart_item_title">Update</div>
-											<div class="cart_item_text"> <button>Update</button>  </div>
+											<div class="cart_item_text"> <button>Add To Cart</button>  </div>
 										</div>
 										<div class="cart_item_quantity cart_info_col">
 											<div class="cart_item_title">Remove</div>
@@ -67,17 +58,8 @@
 	   
 
 						<!-- Order Total -->
-						<div class="order_total">
-							<div class="order_total_content text-md-right">
-								<div class="order_total_title">Order Total:</div>
-								<div class="order_total_amount"><?php echo Cart::subtotal(); ?></div>
-							</div>
-						</div>
+						
 
-						<div class="cart_buttons">
-							<button type="button" class="button cart_button_clear">Add to Cart</button>
-							<button type="button" class="button cart_button_checkout">Add to Cart</button>
-						</div>
 					</div>
 				</div>
 			</div>

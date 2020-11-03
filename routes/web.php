@@ -16,14 +16,24 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+// ajex add to cart + add to wish list
+Route::get('/cartAdd/{id}', 'CartController@add')->name('add.cart');
+Route::get('/wishListAdd/{id}', 'WishListController@add')->name('add.wishlist');
 
 // shop front-end
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product', 'HomeController@product')->name('product');
 Route::get('/cart', 'HomeController@cart')->name('cart');
+Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
 Route::get('/shop', 'HomeController@shop')->name('shop');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
+
+//search
+Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/search/category/{id}', 'HomeController@searchCat')->name('search.category');
+Route::get('/search/subcategory/{id}', 'HomeController@searchSubCat')->name('search.subcategory');
+Route::get('/search/subsubcategory/{id}', 'HomeController@searchSubSubCat')->name('search.subsubcategory');
 
 
 Route::get('/admin', 'AdminController@index')->name('admin.home');
