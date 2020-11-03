@@ -284,11 +284,11 @@
 										<!-- Slider Item -->
 										<div class="arrivals_slider_item">
 											<div class="border_active"></div>
-											<div class="product_item  d-flex flex-column align-items-center justify-content-center text-center">
-												<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{asset('images/' . $product['image'])}}" alt=""></div>
+											<a href="{{route('product.list', $product->id)}}"> <div class="product_item  d-flex flex-column align-items-center justify-content-center text-center">
+												<div style="width:100%;" class="product_image d-flex flex-column align-items-center justify-content-center"><img style="width:100%;" src="{{asset('images/' . $product['image'])}}" alt=""></div></a>
 												<div class="product_content">
 													<div class="product_price">{{$product->price}}</div>
-													<div class="product_name"><div><a href="product.html">  {{$product->name}} </a></div></div>
+													<div class="product_name"><div><a href="{{route('product.list', $product->id)}}">  {{$product->name}} </a></div></div>
 													<div class="product_extras">
 													<button class="product_cart_button addcart" data-id="{{ $product->id }}">Add to Cart</button>
 														

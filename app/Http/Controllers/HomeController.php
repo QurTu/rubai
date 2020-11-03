@@ -8,6 +8,7 @@ use App\SubCategory;
 use App\Category;
 use App\Product;
 use Cart;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -37,12 +38,21 @@ class HomeController extends Controller
     }
 
 
-    public function product()
+    public function product($id)
     {
         $subSubCategories = SubSubCategory::all();
         $subCategories = SubCategory::all();
         $categories = Category::all();
-        return view('front-end.product', \compact('categories','subCategories', 'subSubCategories' ));
+
+
+
+        $products = DB::table('products')
+        ->join('categories', 'categories.id', '=' ,'products.category_id')
+        ->join('sub_categories', 'sub_categories.id', '=' ,'products.sub_category_id')
+        ->join('sub_sub_categories', 'sub_sub_categories.id', '=' ,'products.sub_sub_category_id')
+        ->select('products.*', 'categories.name as category_name', 'sub_categories.name as sub_category_name', 'sub_sub_categories.name as sub_sub_category_name' )
+        ->where('products.id', $id)->get() ;
+        return view('front-end.product', \compact('categories','subCategories', 'subSubCategories', 'products' ));
     }
 
     public function cart()

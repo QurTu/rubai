@@ -90,10 +90,10 @@
 							<div class="product_item is_new">
 								<div class="product_border"></div>
 								<div class="product_image d-flex flex-column align-items-center justify-content-center">
-								<a href="#aa">   <img src="{{asset('images/' . $product->image)}}" alt=""> </a>  </div>
+								<a href="{{route('product.list', $product->id)}}">   <img src="{{asset('images/' . $product->image)}}" alt=""> </a>  </div>
 								<div class="product_content">
 									<div class="product_price">{{$product->price}}</div>
-									<div class="product_name"><div><a href="#" tabindex="0">{{$product->name}}
+									<div class="product_name"><div><a href="{{route('product.list', $product->id)}}" tabindex="0">{{$product->name}}
 									</div></div>
 									</a>
 								</div>

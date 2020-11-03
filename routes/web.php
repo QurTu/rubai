@@ -22,7 +22,7 @@ Route::get('/wishListAdd/{id}', 'WishListController@add')->name('add.wishlist');
 
 // shop front-end
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/product', 'HomeController@product')->name('product');
+Route::get('/product/{id}', 'HomeController@product')->name('product.list');
 Route::get('/cart', 'HomeController@cart')->name('cart');
 Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
 
