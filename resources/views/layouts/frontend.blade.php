@@ -138,22 +138,20 @@
 									<div class="cat_burger"><span></span><span></span><span></span></div>
 									<div class="cat_menu_text">Kategorijos</div>
 								</div>
-
-								<ul class="cat_menu">
-									
-									
+								<ul class="cat_menu">										
 								@foreach($categories as $category)
 									<li class="hassubs">
-										<a href="#">{{$category->name}}<i class="fas fa-chevron-right"></i></a>
+										<a href="{{route('search.category', $category->id )}}">{{$category->name}}<i class="fas fa-chevron-right"></i></a>
 										<ul>
 										@foreach($subCategories as $sub)
 										@if($sub->category_id == $category->id) 
 											<li class="hassubs">
-												<a href="#">{{$sub->name}}<i class="fas fa-chevron-right"></i></a>
+												<a href="{{route('search.subcategory', $sub->id )}}">{{$sub->name}}<i class="fas fa-chevron-right"></i></a>
 												<ul>
 												@foreach($subSubCategories as $subsub)
 												@if($subsub->sub_category_id == $sub->id )
-													<li><a href="#"><i class="fas fa-chevron-right"> </i> {{$subsub->name}}</a></li>
+												
+													<li><a href="{{route('search.subsubcategory', $subsub->id )}}"><i class="fas fa-chevron-right"> </i> {{$subsub->name}}</a></li>
 												@endif
 												@endforeach
 												</ul>
@@ -299,10 +297,7 @@
 												<button class="addwishlist" data-id="{{ $product->id }}" >
 													<div class="product_fav"><i class="fas fa-heart"></i></div>
 													</button>
-												<ul class="product_marks">
-													<li class="product_mark product_discount"></li>
-													<li class="product_mark product_new">new</li>
-												</ul>
+												
 											</div>
 										</div>
 

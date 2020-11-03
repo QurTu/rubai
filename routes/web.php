@@ -25,15 +25,15 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product', 'HomeController@product')->name('product');
 Route::get('/cart', 'HomeController@cart')->name('cart');
 Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
-Route::get('/shop', 'HomeController@shop')->name('shop');
+
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
 
 //search
-Route::get('/search', 'HomeController@search')->name('search');
-Route::get('/search/category/{id}', 'HomeController@searchCat')->name('search.category');
-Route::get('/search/subcategory/{id}', 'HomeController@searchSubCat')->name('search.subcategory');
-Route::get('/search/subsubcategory/{id}', 'HomeController@searchSubSubCat')->name('search.subsubcategory');
+Route::get('/shop', 'HomeController@shop')->name('shop');
+Route::get('/shop/category/{id}', 'HomeController@searchCat')->name('search.category');
+Route::get('/shop/subcategory/{id}', 'HomeController@searchSubCat')->name('search.subcategory');
+Route::get('/shop/subsubcategory/{id}', 'HomeController@searchSubSubCat')->name('search.subsubcategory');
 
 
 Route::get('/admin', 'AdminController@index')->name('admin.home');
