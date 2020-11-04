@@ -24,40 +24,43 @@
 						<a href="{{route('search.category', $product->category_id )}}">{{$product->category_name}} </a>  >
 						<a href="{{route('search.subcategory', $product->sub_category_id )}}">{{$product->sub_category_name}}</a> >
 						<a href="{{route('search.subsubcategory', $product->sub_sub_category_id )}}">{{$product->sub_sub_category_name}}</a>
+						<input value='{{$product->id}}' type="hidden" name="product_id">
 						</div>
 						<div class="product_name">{{$product->name}}</div>
-						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						
 						<div class="product_text"><p>{{$product->discription}}</p></div>
 						<div class="order_info d-flex flex-row">
 							<form action="#">
 								<div class="clearfix" style="z-index: 1000;">
 
-									<!-- Product Quantity -->
-									<div class="product_quantity clearfix">
-										<span>Quantity: </span>
-										<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-										<div class="quantity_buttons">
-											<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
-											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
-										</div>
-									</div>
+									
 
 									<!-- Product Color -->
-									<ul class="product_color">
-										<li>
-											<span>Color: </span>
-											<div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
-											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
+									@foreach($productVariant as $variant)
+									
 
-											<ul class="color_list">
-												<li><div class="color_mark" style="background: #999999;"></div></li>
-												<li><div class="color_mark" style="background: #b19c83;"></div></li>
-												<li><div class="color_mark" style="background: #000000;"></div></li>
-											</ul>
-										</li>
-									</ul>
+									<div class="form-group">
+									<label for="">{{$variant->variant_name}}: </label>
+									<select name='{{$variant->variant_name}}' class="form-control">
+										<option >--pasirinkite--</option>
+											@foreach($variant->options as $option)
+											<option value="{{$option['qnt']}}"  @if( $option['qnt'] == 0 ) disabled @endif > {{$option['name']}} @if( $option['qnt'] == 0 ) (baigesi) @endif </option>
+											@endforeach
+										</select>
+									</div>
+									@endforeach
 
-								</div>
+<!-- Product Quantity -->
+								<div class="form-group">
+								<label for="formGroupExampleInput">Kiekis:</label>
+   								 <input type="number" name="" min="1" value='1' class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+								
+									</div>
+
+									
+									
+
+								
 
 								<div class="product_price">{{$product->price}}</div>
 								<div class="button_container">
@@ -73,4 +76,54 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+
+@section('scripts')
+
+
+@foreach($productVariant as $variant)
+<script type="text/javascript"> 
+$('select[name="{{$variant->variant_name}}"]').on('change',function(){
+          var input = this.options[this.selectedIndex].text;
+		  var id = $('input[name="product_id"]').val();	
+		  var name = '{{$variant->variant_name}}';
+		  console.log(name)	  
+		  if (input) {
+            $.ajax({
+              url: "{{ url('/product/select/variants') }}/"+input + "/" + id + "/" + name ,
+              type:"GET",
+              dataType:"json",
+              success:function(data) { 
+			   for (let i = 0; i < data.length; i++) {
+
+
+				$("select[name="+ data[i].variant_name+"] > option").not(':first-child').each(function(it) {
+					this.value= data[i].options[it].qnt;
+					console.log(data[i].options[it].name);
+					if(this.value == 0){
+						$(this).attr("disabled", true);
+						this.text = data[i].options[it].name + '(baigesi)';
+					}
+					else {
+						this.text = data[i].options[it].name ;
+						if($(this).attr("disabled"))
+						 {
+							$(this).attr("disabled", false);
+							}						
+					}
+					});
+				   
+			   }
+              },
+            });
+
+          }else{
+            alert('danger');
+          }
+      });
+
+</script>
+@endforeach
+
 @endsection

@@ -581,6 +581,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{ asset('frontend/plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
 <script src="{{ asset('frontend/plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{ asset('frontend/js/shop_custom.js')}}"></script>
+@yield('scripts')
 </body>
 
 </html>
