@@ -36,7 +36,7 @@ class HomeController extends Controller
           $categorie =  $categorie->products;
         }
        
-        return view('layouts.frontend', \compact('categories','subCategories', 'subSubCategories', 'categoriesWithProducts' ));
+        return view('front-end.home', \compact('categories','subCategories', 'subSubCategories', 'categoriesWithProducts' ));
     }
 
 
