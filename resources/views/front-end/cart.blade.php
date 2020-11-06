@@ -21,10 +21,18 @@
 											<div class="cart_item_text"> {{$item->name}}</div>
 											
 										</div>
-										<div class="cart_item_color cart_info_col">
-											<div class="cart_item_title">Color</div>
-											<div class="cart_item_text"><span style="background-color:#999999;"></span>Silver</div>
+
+
+										@foreach($item->options as $key => $variant)
+										@if($key != 'image')
+										<div class="cart_item_quantity cart_info_col">
+											<div class="cart_item_title">{{$key}}</div>
+											<div class="cart_item_text"> {{$variant}}</div>
 										</div>
+										@endif
+										@endforeach
+
+
 										<div class="cart_item_quantity cart_info_col">
 											<div class="cart_item_title">Quantity</div>
 											<div class="cart_item_text"> {{$item->qty}}</div>
@@ -43,7 +51,11 @@
 										</div>
 										<div class="cart_item_quantity cart_info_col">
 											<div class="cart_item_title">Remove</div>
-											<div class="cart_item_text"> <button>Remove</button></div>
+											<form action="{{route('remove.cart')}}" method="post">  
+											<input type="hidden" name="rowId" value="{{$item->rowId}}" >
+											@csrf
+											<div class="cart_item_text"> <button type="submit">Remove</button></div>
+											</form>
 										</div>
 									</div>
 								</li>

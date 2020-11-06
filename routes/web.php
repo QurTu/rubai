@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 // ajex add to cart + add to wish list
 Route::get('/cartAdd/{id}', 'CartController@add')->name('add.cart');
+Route::post('/cart/remove', 'CartController@remove')->name('remove.cart');
+Route::post('add/to/cart/product', 'CartController@addFromProduct')->name('Cart.from.product');
+
+
 Route::get('/wishListAdd/{id}', 'WishListController@add')->name('add.wishlist');
 
 // shop front-end

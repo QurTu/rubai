@@ -37,12 +37,16 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $id = Auth::id();
-        Cart::instance('cart')->merge(Auth::id());
+        
         $this->middleware('guest')->except('logout');
+        
+
     }
 
-
+    public function  authenticated() {
+        $id = Auth::id();
+        Cart::instance('cart')->merge(Auth::id());
+    }
   
 
    

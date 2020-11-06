@@ -123,13 +123,12 @@ class HomeController extends Controller
     {   
        
 
-       Cart::instance('cart')->merge(Auth::id());
+        
         $cart = Cart::instance('cart')->content();
-        Cart::instance('cart')->erase( Auth::id());
-        Cart::instance('cart')->store( Auth::id());
         $subSubCategories = SubSubCategory::all();
         $subCategories = SubCategory::all();
         $categories = Category::all();
+      // return $cart;
         return view('front-end.cart', \compact('categories','subCategories', 'subSubCategories', 'cart' ));
     }
 
