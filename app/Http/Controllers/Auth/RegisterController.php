@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
+use Cart;
 
 class RegisterController extends Controller
 {
@@ -29,6 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -38,7 +41,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+       
         $this->middleware('guest');
+     
     }
 
     /**
@@ -64,10 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = new User;
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->save();
+        $id = $user->id;
+        Cart::instance('cart');
+        Cart::instance('cart')->store($id);
+            return $user; 
     }
 }

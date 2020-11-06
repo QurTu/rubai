@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\DB;
 use App\ProductVariant;
 use App\ProductVariantOption;
 use App\UniqueProduct;
+use Auth;
 class HomeController extends Controller
+
 {
     /**
      * Create a new controller instance.
@@ -119,7 +121,12 @@ class HomeController extends Controller
 
     public function cart()
     {   
-        $cart = Cart::instance('shopping')->content();
+       
+
+       Cart::instance('cart')->merge(Auth::id());
+        $cart = Cart::instance('cart')->content();
+        Cart::instance('cart')->erase( Auth::id());
+        Cart::instance('cart')->store( Auth::id());
         $subSubCategories = SubSubCategory::all();
         $subCategories = SubCategory::all();
         $categories = Category::all();

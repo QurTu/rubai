@@ -19,7 +19,8 @@ class CartController extends Controller
            $data['options']['image'] = $product->image;
            $data['options']['color'] = '';
            $data['options']['size'] = '';
-            Cart::instance('shopping')->add($data);
+            Cart::instance('cart')->add($data);
+            
             return \Response::json(['success' => 'Successfully Added on your Cart']);
     }
 }

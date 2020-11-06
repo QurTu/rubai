@@ -40,11 +40,23 @@
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 							</div>
+							@guest
 							<div class="top_bar_user">
-								<div class="user_icon"><img src="{{ asset('frontend/images/user.svg')}}" alt=""></div>
-								<div><a href="#">Register</a></div>
-								<div><a href="#">Sign in</a></div>
+								<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								<div><a href="{{route('register')}}">Register</a></div>
+								<div><a href="{{route('login')}}">Sign in</a></div>
 							</div>
+						@endguest
+
+						@auth
+						<div class="top_bar_user">
+								<div class="user_icon"><img src="images/user.svg" alt=""></div>
+								<form action="{{route('logout')}}" method="post">
+								@csrf
+								<button type="submit">   Log Out</button>
+								</form>
+							</div>					
+								@endauth
 						</div>
 					</div>
 				</div>
