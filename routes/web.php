@@ -44,7 +44,18 @@ Route::get('/shop/category/{id}', 'HomeController@searchCat')->name('search.cate
 Route::get('/shop/subcategory/{id}', 'HomeController@searchSubCat')->name('search.subcategory');
 Route::get('/shop/subsubcategory/{id}', 'HomeController@searchSubSubCat')->name('search.subsubcategory');
 
+//shipping
+Route::get('/shipping', 'ShippingController@shipping')->name('shipping');
+Route::post('/shipping/add', 'ShippingController@add')->name('shipping.add');
+Route::get('/shipping/edit/{shipping}', 'ShippingController@edit')->name('shipping.edit');
+Route::post('/shipping/update/{shipping}', 'ShippingController@update')->name('shipping.update');
+Route::post('/shipping/delete/{shipping}', 'ShippingController@delete')->name('shipping.delete');
 
+
+
+
+
+                                    //  admin routes
 Route::get('/admin', 'AdminController@index')->name('admin.home');
      // Category routes
      Route::get('admin/category', 'CategoryController@index')->name('category');
