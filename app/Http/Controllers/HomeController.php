@@ -13,6 +13,7 @@ use App\ProductVariant;
 use App\ProductVariantOption;
 use App\UniqueProduct;
 use Auth;
+use App\Libs\WebToPay;
 class HomeController extends Controller
 
 {
@@ -21,7 +22,55 @@ class HomeController extends Controller
      *
      * @return void
      */
-  
+   public function moketi(){
+    try {             
+        $request = WebToPay::redirectToPayment(array(
+            'projectid'     => 191183,
+            'sign_password' => 'dc1c347d471f68e41ad2a9a1145941d6',
+            'orderid'       => 0,
+            'amount'        => 1000,
+            'currency'      => 'EUR',
+            'country'       => 'LT',
+            'accepturl'     => $self_url.'/accept.php',
+            'cancelurl'     => $self_url.'/cancel.php',
+            'callbackurl'   => $self_url.'/callback.php',
+            'test'          => 1,
+        ));
+    } catch (WebToPayException $e) {
+        // handle exception
+    }
+   }
+
+   public function PaymentAccept() {
+
+    try{
+        $response = WebToPay::checkResponse($_GET, array(
+            'projectid' => 191183,
+            'sign_password' => 'dc1c347d471f68e41ad2a9a1145941d6',
+        ));
+     
+        if($response['test'] !== '0'){
+            throw new Exception('Testing, real payment was not made');
+        }
+        if($response['type'] !== 'macro'){
+            throw new Exception('Only macro payment callbacks are accepted');
+        }
+     
+        $orderId = $response['orderid'];
+        $amount = $response['amount'];
+        $currency = $response['currency'];
+        //@todo: patikrinti, ar užsakymas su $orderId dar nepatvirtintas (callback gali būti pakartotas kelis kartus)
+        //@todo: patikrinti, ar užsakymo suma ir valiuta atitinka $amount ir $currency
+        //@todo: patvirtinti užsakymą
+
+        // rasti avo duombazeje orderi ir jam pakeisti statusa i amoketa, kai padrai patikirinimus.
+     
+       
+    } catch(Exception$e) {
+        echo get_class($e) . ':' . $e->getMessage();
+
+   }
+}
 
     /**
      * Show the application dashboard.
