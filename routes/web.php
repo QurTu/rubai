@@ -31,6 +31,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product/{id}', 'HomeController@product')->name('product.list');
 Route::get('/product/select/variants/{input}/{id}/{name}', 'HomeController@productAjax')->name('product.input');
 
+Route::post('/moket', 'HomeController@moketi')->name('moketi');
+Route::get('/moket/acc', 'HomeController@accept')->name('accept');
+Route::get('/moket/got', 'HomeController@cancel')->name('cancel');
+Route::post('/moket/callback', 'HomeController@PaymentAccept')->name('callback');
 
 Route::get('/cart', 'HomeController@cart')->name('cart');
 Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');

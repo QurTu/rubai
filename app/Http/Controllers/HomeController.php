@@ -24,22 +24,36 @@ class HomeController extends Controller
      */
    public function moketi(){
     try {             
-        $request = WebToPay::redirectToPayment(array(
+     $request =  WebToPay::redirectToPayment(array(
             'projectid'     => 191183,
             'sign_password' => 'dc1c347d471f68e41ad2a9a1145941d6',
-            'orderid'       => 0,
+            'orderid'       => 3,
             'amount'        => 1000,
             'currency'      => 'EUR',
             'country'       => 'LT',
-            'accepturl'     => $self_url.'/accept.php',
-            'cancelurl'     => $self_url.'/cancel.php',
-            'callbackurl'   => $self_url.'/callback.php',
+            'accepturl'     => route('accept'),
+            'cancelurl'     => route('cancel'),
+            'callbackurl'   => route('callback'),
             'test'          => 1,
         ));
+       return redirect($request);
     } catch (WebToPayException $e) {
         // handle exception
     }
    }
+   public function accept() {
+       echo 'bybys1';
+
+   }
+   public function cancel() {
+    echo 'bybys2';
+
+}
+public function callback() {
+    echo 'bybys3';
+
+}
+
 
    public function PaymentAccept() {
 

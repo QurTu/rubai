@@ -51,7 +51,7 @@
 						</div>
 						
                         <div class="cart_buttons">
-							<form action="" method="get">
+							<form action="{{route('moketi')}}" method="post">
 							@csrf    
 							<button type="submit" class="button cart_button_checkout">pasirinkti shipping adresa</button>
 							</form>
