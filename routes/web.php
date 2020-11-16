@@ -79,7 +79,6 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
      Route::post('admin/sub/subcategory/delete/{subSubCategory}', 'SubSubCategoryController@delete')->name('subsubcategory.delete');
      Route::get('admin/sub/subcategory/edit/{subSubCategory}', 'SubSubCategoryController@edit')->name('subsubcategory.edit');
      Route::post('admin/sub/subcategory/update/{subSubCategory}', 'SubSubCategoryController@update')->name('subsubcategory.update');
-
      //ajax get sub-category
      Route::get('get/subcategory/{id}', 'SubSubCategoryController@getSubCategoryNew')->name('get.subcategoryNew');
      Route::get('get/subcategory/{id}/{name}', 'SubSubCategoryController@getSubCategory')->name('get.subcategory');
@@ -112,9 +111,20 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
     Route::post('admin/productVariant/delete/{productVariant}', 'ProductVariantController@delete')->name('productVariant.delete');
     Route::get('admin/productVariant/edit/{productVariant}', 'ProductVariantController@edit')->name('productVariant.edit');
     
-    
     // ProductVariantOption routes
     Route::post('admin/ProductVariantOption/add', 'ProductVariantOptionController@add')->name('productVariantOption.store');
     Route::post('admin/ProductVariantOption/delete/{productVariantOption}', 'ProductVariantOptionController@delete')->name('productVariantOption.delete');
     //unique product
     Route::post('admin/uniqueProduct/add', 'UniqueProductController@add')->name('uniqueProduct.store');
+
+    // oreder routes 
+   
+    
+    Route::get('admin/orders', 'OrderController@allOrders')->name('orders.all');
+    Route::get('admin/orders/unpaid', 'OrderController@unPaidOrders')->name('orders.unpaid');
+    Route::get('admin/orders/paid', 'OrderController@paidOrders')->name('orders.paid');
+    Route::get('admin/orders/ready', 'OrderController@readyOrders')->name('orders.readyGet');
+    Route::get('admin/orders/done', 'OrderController@doneOrders')->name('orders.done');
+    Route::post('admin/orders/ready/{order}', 'OrderController@ready')->name('orders.ready');
+
+    Route::get('admin/orders/edit/{order}', 'OrderController@allOrdersEdit')->name('orders.edit');

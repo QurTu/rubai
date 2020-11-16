@@ -7,6 +7,9 @@ use App\SubSubCategory;
 use App\SubCategory;
 use App\Category;
 use App\Product;
+use App\Shipping;
+use App\Order;
+use App\Order_detail;
 use Cart;
 use Illuminate\Support\Facades\DB;
 use App\ProductVariant;
@@ -23,12 +26,40 @@ class HomeController extends Controller
      * @return void
      */
    public function moketi(){
+    $cart = Cart::instance('cart')->content();
+    $shipping = Shipping::where('user_id', Auth::id())->first();
+    $order = new Order();
+    $order->payment = 'paysera';
+    $order->how_ship = 'kurjeris';
+    $order->price = Cart::subtotal();
+    $order->status = 1;
+    $order->user_id = Auth::id();
+    $order->shipping_id = $shipping->id;
+    $order->save();
+    foreach($cart as $item){
+        $details = new Order_detail();
+        $details->order_id = $order->id;
+        $details->product_id = $item->id;
+        $details->qnt = $item->qty;
+        $variants =array();
+        foreach($item->options as $key => $variant) {
+            if($key != 'image') {
+                $variants[$key] = $variant;
+            }
+        }
+        $details->variants = json_encode($variants);
+        $details->save();
+    }
+    Cart::destroy();
+    Cart::instance('cart')->erase( Auth::id());
+
+
     try {             
      $request =  WebToPay::redirectToPayment(array(
             'projectid'     => 191183,
             'sign_password' => 'dc1c347d471f68e41ad2a9a1145941d6',
-            'orderid'       => 3,
-            'amount'        => 1000,
+            'orderid'       => $order->id,
+            'amount'        => $order->price * 100,
             'currency'      => 'EUR',
             'country'       => 'LT',
             'accepturl'     => route('accept'),
@@ -42,6 +73,7 @@ class HomeController extends Controller
     }
    }
    public function accept() {
+       $this->PaymentAccept();
        echo 'bybys1';
 
    }
@@ -49,10 +81,7 @@ class HomeController extends Controller
     echo 'bybys2';
 
 }
-public function callback() {
-    echo 'bybys3';
 
-}
 
 
    public function PaymentAccept() {
@@ -63,16 +92,15 @@ public function callback() {
             'sign_password' => 'dc1c347d471f68e41ad2a9a1145941d6',
         ));
      
-        if($response['test'] !== '0'){
-            throw new Exception('Testing, real payment was not made');
-        }
-        if($response['type'] !== 'macro'){
-            throw new Exception('Only macro payment callbacks are accepted');
-        }
      
         $orderId = $response['orderid'];
         $amount = $response['amount'];
         $currency = $response['currency'];
+        $order = Order::where('id' , $orderId )->first();
+        if($order->status == 1 && $amount == $order->price *  100  &&  $currency == "EUR" ) {
+            $order->status = 2;
+            $order->save();
+        }
         //@todo: patikrinti, ar užsakymas su $orderId dar nepatvirtintas (callback gali būti pakartotas kelis kartus)
         //@todo: patikrinti, ar užsakymo suma ir valiuta atitinka $amount ir $currency
         //@todo: patvirtinti užsakymą

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Shipping;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,9 +13,35 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function allOrders()
+    {   
+        $orders = Order::all();
+        return view('admin.order.all' , compact( 'orders'));
+    }
+
+    public function unPaidOrders()
+    {   
+        $orders = Order::where('status' , 1)->get();
+        return view('admin.order.unpayed' , compact( 'orders'));
+    }
+
+    public function paidOrders()
+    {   
+        $orders = Order::where('status' , 2)->get();
+        return view('admin.order.payed' , compact( 'orders'));
+    }
+
+    public function readyOrders()
+    {   
+        $orders = Order::where('status' , 3)->get();
+        return view('admin.order.payed' , compact( 'orders'));
+    }
+
+    
+    public function doneOrders()
+    {   
+        $orders = Order::where('status' , 4)->get();
+        return view('admin.order.payed' , compact( 'orders'));
     }
 
     /**
@@ -22,9 +49,17 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function allOrdersEdit(Order $order)
+    { 
+        $order->details = $order->OrderDetails()->get();
+        $order->shipping = Shipping::where('id', $order->shipping_id)->first();
+        return view('admin.order.allEdit' , compact( 'order'));
+    }
+
+    public function ready(Order $order){
+        $order->status = 3;
+        $order->save();
+        return redirect()->route('orders.paid');
     }
 
     /**

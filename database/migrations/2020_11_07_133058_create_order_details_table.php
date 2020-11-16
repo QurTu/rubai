@@ -19,7 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->json('variants');
+            $table->json('variants')->nullable();
             $table->integer('qnt');
             $table->timestamps();
         });
