@@ -121,24 +121,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
+        
         $categories = Category::all();
         $categoriesWithProducts = Category::all()->take(2);
         foreach($categoriesWithProducts as $categorie) {
           $categorie =  $categorie->products;
         }
        
-        return view('front-end.home', \compact('categories','subCategories', 'subSubCategories', 'categoriesWithProducts' ));
+        return view('front-end.home', \compact( 'categoriesWithProducts' ));
     }
 
 
     public function product($id)
     {
         //product info
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
+    
         $products = DB::table('products')
         ->join('categories', 'categories.id', '=' ,'products.category_id')
         ->join('sub_categories', 'sub_categories.id', '=' ,'products.sub_category_id')
@@ -171,7 +168,7 @@ class HomeController extends Controller
         }
       
       //  return $productVariant;
-        return view('front-end.product', \compact('categories','subCategories', 'subSubCategories', 'products', 'productVariant' ));
+        return view('front-end.product', \compact( 'products', 'productVariant' ));
     }
 
     public function productAjax($input, $id, $name){
@@ -216,65 +213,50 @@ class HomeController extends Controller
 
         
         $cart = Cart::instance('cart')->content();
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
+        
       // return $cart;
-        return view('front-end.cart', \compact('categories','subCategories', 'subSubCategories', 'cart' ));
+        return view('front-end.cart', \compact( 'cart' ));
     }
 
     
     public function wishlist()
     {   
-        $cart = Cart::instance('wishlist')->content();
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
-        return view('front-end.wishlist', \compact('categories','subCategories', 'subSubCategories', 'cart' ));
+        $cart = Cart::instance('wishlist')->content();  
+        return view('front-end.wishlist', \compact( 'cart' ));
     }
 
 
     public function contact()
     {
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
-        return view('front-end.contact', \compact('categories','subCategories', 'subSubCategories' ));
+      
+        return view('front-end.contact');
     }
                                            
                                      // Shop Pages 
      public function shop()
     {
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
+        
         $products = Product::paginate(25);
-        return view('front-end.shop', \compact('categories','subCategories', 'subSubCategories', 'products'  ));
+        return view('front-end.shop', \compact( 'products'  ));
     }
                                            
     public function searchCat($id) {
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
+      
         $subCats = SubCategory::where('id' , $id)->get();
         $products = Product::where('category_id', $id)->paginate(25);
-        return view('front-end.shop', \compact('categories','subCategories', 'subSubCategories', 'products', 'subCats' ));
+        return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     public function searchSubCat($id) {
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
+       
         $subCats = SubSubCategory::where('id' , $id)->get();
         $products = Product::where('sub_category_id', $id)->paginate(25);
-        return view('front-end.shop', \compact('categories','subCategories', 'subSubCategories', 'products', 'subCats' ));
+        return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     public function searchSubSubCat($id) {
-        $subSubCategories = SubSubCategory::all();
-        $subCategories = SubCategory::all();
-        $categories = Category::all();
+
         $subCats = SubSubCategory::where('id' , $id)->get();
         $products = Product::where('sub_sub_category_id', $id)->paginate(25);
-        return view('front-end.shop', \compact('categories','subCategories', 'subSubCategories', 'products', 'subCats' ));
+        return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     
 
