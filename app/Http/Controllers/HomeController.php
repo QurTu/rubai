@@ -9,6 +9,7 @@ use App\Category;
 use App\Product;
 use App\Shipping;
 use App\Order;
+use App\Mail;
 use App\Order_detail;
 use Cart;
 use Illuminate\Support\Facades\DB;
@@ -208,17 +209,11 @@ class HomeController extends Controller
     }
 
     public function cart()
-    {   
-       
-
-        
-        $cart = Cart::instance('cart')->content();
-        
+    {                  
+        $cart = Cart::instance('cart')->content();        
       // return $cart;
         return view('front-end.cart', \compact( 'cart' ));
-    }
-
-    
+    }   
     public function wishlist()
     {   
         $cart = Cart::instance('wishlist')->content();  
@@ -257,6 +252,17 @@ class HomeController extends Controller
         $products = Product::where('name', 'like', "%$request->search%")   ->paginate(25);
         $subCats = Category::all();
          return view('front-end.shop', \compact( 'products', 'subCats' ));
+    }
+              // mail add
+              
+    public function sendMail(Request $request) {
+        $mail = new Mail();
+        $mail->name = $request->name;
+        $mail->email =$request->email;
+        $mail->phoneNumber =$request->phoneNumber;
+        $mail->message = $request->message;
+        $mail->save();
+        return \redirect()->back();
     }
     
 

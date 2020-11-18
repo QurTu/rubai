@@ -129,5 +129,12 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
     Route::post('admin/orders/ready/{order}', 'OrderController@ready')->name('orders.ready');
     Route::get('admin/orders/pickHistrory', 'OrderController@pickHistrory')->name('orders.pickHistrory');
     Route::get('admin/orders/histrory', 'OrderController@history')->name('orders.history');
-
     Route::get('admin/orders/edit/{order}', 'OrderController@allOrdersEdit')->name('orders.edit');
+
+    //mail
+    Route::get('admin/mail/unread', 'MailController@unReadMail')->name('mail.unread');
+    Route::get('admin/mail/all', 'MailController@allMail')->name('mail.all');
+    Route::get('admin/mail/message/{mail}', 'MailController@message')->name('mail.details');
+    Route::post('mail/create', 'HomeController@sendMail')->name('mail.create');
+    Route::post('admin/mail/message/changeStatus/{mail}', 'MailController@changeStatus')->name('mail.response');
+   

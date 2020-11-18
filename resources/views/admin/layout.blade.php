@@ -124,13 +124,13 @@
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
-            <span class="menu-item-label">Maps</span>
+            <span class="menu-item-label">Pastas</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="map-google.html" class="nav-link">Google Maps</a></li>
-          <li class="nav-item"><a href="map-vector.html" class="nav-link">Vector Maps</a></li>
+          <li class="nav-item"><a href="{{route('mail.unread')}}" class="nav-link">Neperskaityta/neatsakyta</a></li>
+          <li class="nav-item"><a href="{{route('mail.all')}}" class="nav-link">visi laiskai</a></li>
         </ul>
         <a href="mailbox.html" class="sl-menu-link">
           <div class="sl-menu-item">
