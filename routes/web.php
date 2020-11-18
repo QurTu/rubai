@@ -44,6 +44,7 @@ Route::get('/contact', 'HomeController@contact')->name('contact');
 
 //search
 Route::get('/shop', 'HomeController@shop')->name('shop');
+Route::get('/shop/search', 'HomeController@search')->name('search');
 Route::get('/shop/category/{id}', 'HomeController@searchCat')->name('search.category');
 Route::get('/shop/subcategory/{id}', 'HomeController@searchSubCat')->name('search.subcategory');
 Route::get('/shop/subsubcategory/{id}', 'HomeController@searchSubSubCat')->name('search.subsubcategory');
@@ -126,5 +127,7 @@ Route::get('/admin', 'AdminController@index')->name('admin.home');
     Route::get('admin/orders/ready', 'OrderController@readyOrders')->name('orders.readyGet');
     Route::get('admin/orders/done', 'OrderController@doneOrders')->name('orders.done');
     Route::post('admin/orders/ready/{order}', 'OrderController@ready')->name('orders.ready');
+    Route::get('admin/orders/pickHistrory', 'OrderController@pickHistrory')->name('orders.pickHistrory');
+    Route::get('admin/orders/histrory', 'OrderController@history')->name('orders.history');
 
     Route::get('admin/orders/edit/{order}', 'OrderController@allOrdersEdit')->name('orders.edit');

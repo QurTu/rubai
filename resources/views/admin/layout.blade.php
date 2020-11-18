@@ -55,7 +55,7 @@
 
     <!-- SummerNotes -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
- 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
 
   <body style='background-color: #ddd;'>
@@ -117,6 +117,7 @@
           <li class="nav-item"><a href="{{route('orders.unpaid')}}" class="nav-link">neapmoketi uzsakymai</a></li>
           <li class="nav-item"><a href="{{route('orders.readyGet')}}" class="nav-link">paruosti uzsakymai</a></li>
           <li class="nav-item"><a href="{{route('orders.done')}}" class="nav-link">pristatyti uzsakymai</a></li>
+          <li class="nav-item"><a href="{{route('orders.pickHistrory')}}" class="nav-link">uzsakumu istorija</a></li>
 
           
         </ul>
@@ -291,7 +292,9 @@
           
      <script src="{{ asset('backend/js/starlight.js') }}"></script>
     <script src="{{ asset('backend/js/ResizeSensor.js') }}"></script>
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    @yield('scripts')
    
   </body>
 </html>

@@ -61,6 +61,18 @@ class OrderController extends Controller
         $order->save();
         return redirect()->route('orders.paid');
     }
+   
+
+    public function pickHistrory(){
+        return view('admin.history.pickHistory');
+    }
+
+    public function history(Request $request){
+        $start = $request->start;
+        $end = $request->end;
+       $histories = Order::whereBetween('date', [$start, $end])->get();
+        return view('admin.history.history' , \compact('histories'));
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -122,7 +122,7 @@ class HomeController extends Controller
     public function index()
     {
         
-        $categories = Category::all();
+        
         $categoriesWithProducts = Category::all()->take(2);
         foreach($categoriesWithProducts as $categorie) {
           $categorie =  $categorie->products;
@@ -228,35 +228,35 @@ class HomeController extends Controller
 
     public function contact()
     {
-      
         return view('front-end.contact');
     }
                                            
                                      // Shop Pages 
      public function shop()
-    {
-        
+    {    
         $products = Product::paginate(25);
         return view('front-end.shop', \compact( 'products'  ));
-    }
-                                           
+    }                                         
     public function searchCat($id) {
-      
         $subCats = SubCategory::where('id' , $id)->get();
         $products = Product::where('category_id', $id)->paginate(25);
         return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
-    public function searchSubCat($id) {
-       
+    public function searchSubCat($id) {  
         $subCats = SubSubCategory::where('id' , $id)->get();
         $products = Product::where('sub_category_id', $id)->paginate(25);
         return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     public function searchSubSubCat($id) {
-
         $subCats = SubSubCategory::where('id' , $id)->get();
         $products = Product::where('sub_sub_category_id', $id)->paginate(25);
         return view('front-end.shop', \compact( 'products', 'subCats' ));
+    }
+    public function search(Request $request){
+        
+        $products = Product::where('name', 'like', "%$request->search%")   ->paginate(25);
+        $subCats = Category::all();
+         return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     
 
