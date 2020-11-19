@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\SubSubCategory;
 use App\SubCategory;
 use App\Category;
+use App\Product;
 class CategoryComposer
 {
 
@@ -19,7 +20,12 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $view->with(['categories'=>  Category::all(), 'subCategories' => SubCategory::all(), 'subSubCategories'=>SubSubCategory::all() ]);
+
+        $view->with([
+            'recentlyViewedProducts' => \RecentlyViewed\Facades\RecentlyViewed::get(Product::class),
+             'categories'=>  Category::all(),
+              'subCategories' => SubCategory::all(), 
+              'subSubCategories'=>SubSubCategory::all() ]);
         
     }
 }

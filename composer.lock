@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfa8f41d9cbd81f28bcc3f970c1143e1",
+    "content-hash": "6a1877dd8b8e0166adc2f889d2283d64",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4629,6 +4629,71 @@
                 }
             ],
             "time": "2020-07-22T23:32:04+00:00"
+        },
+        {
+            "name": "yaroslawww/laravel-recently-viewed",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yaroslawww/laravel-recently-viewed.git",
+                "reference": "966600d57fcf62602cbf703f0b68d95a5a283496"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yaroslawww/laravel-recently-viewed/zipball/966600d57fcf62602cbf703f0b68d95a5a283496",
+                "reference": "966600d57fcf62602cbf703f0b68d95a5a283496",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^9.0",
+                "psalm/plugin-laravel": "^1.2",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RecentlyViewed\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "RecentlyViewed": "RecentlyViewed\\Facades\\RecentlyViewed"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RecentlyViewed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yaroslav Georgitsa",
+                    "email": "yaroslav.georgitsa@gmail.com",
+                    "homepage": "https://github.com/yaroslawww",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package to make quickly recently viewed functionality",
+            "homepage": "https://github.com/yaroslawww/laravel-recently-viewed",
+            "keywords": [
+                "laravel-recently-viewed",
+                "recently-viewed"
+            ],
+            "support": {
+                "issues": "https://github.com/yaroslawww/laravel-recently-viewed/issues",
+                "source": "https://github.com/yaroslawww/laravel-recently-viewed/tree/master"
+            },
+            "time": "2020-06-09T08:09:26+00:00"
         }
     ],
     "packages-dev": [

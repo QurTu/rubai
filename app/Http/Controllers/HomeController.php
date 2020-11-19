@@ -18,6 +18,7 @@ use App\ProductVariantOption;
 use App\UniqueProduct;
 use Auth;
 use App\Libs\WebToPay;
+use RecentlyViewed\Models\Contracts\Viewable;
 class HomeController extends Controller
 
 {
@@ -136,7 +137,8 @@ class HomeController extends Controller
     public function product($id)
     {
         //product info
-    
+        $product = Product::where('id', $id)->first();
+        \RecentlyViewed\Facades\RecentlyViewed::add($product);
         $products = DB::table('products')
         ->join('categories', 'categories.id', '=' ,'products.category_id')
         ->join('sub_categories', 'sub_categories.id', '=' ,'products.sub_category_id')
@@ -168,7 +170,7 @@ class HomeController extends Controller
             $variant->options = $optArray;
         }
       
-      //  return $productVariant;
+        
         return view('front-end.product', \compact( 'products', 'productVariant' ));
     }
 
