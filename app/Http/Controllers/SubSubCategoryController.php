@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SubSubCategory;
 use App\SubCategory;
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -132,8 +133,12 @@ class SubSubCategoryController extends Controller
      * @param  \App\SubSubCategory  $subSubCategory
      * @return \Illuminate\Http\Response
      */
-    public function delete(SubSubCategory $subSubCategory)
+    public function delete(Request $request)
     {
+        $subSubCategory = SubSubCategory::where('id', $request->category_id)->first();
+        $products = Product::where('sub_sub_category_id', $subSubCategory->id)->get();
+        return $products;
+
         $subSubCategory->delete();
         return redirect()->route('subsubcategory');
     }

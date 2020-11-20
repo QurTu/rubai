@@ -52,13 +52,13 @@
   
     <!-- Scripts -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-
+   
     <!-- SummerNotes -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
 
-  <body style='background-color: #ddd;'>
+  <body >
   
   <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
@@ -216,9 +216,12 @@
     <script src="{{ asset('backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
     <script src="{{ asset('backend/lib/highlightjs/highlight.pack.js') }}"></script>
     <script src="{{ asset('backend/lib/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('backend/lib/datatables-responsive/dataTables.responsive.js') }}"></script>
+    
     <script src="{{ asset('backend/lib/select2/js/select2.min.js') }}"></script>  
+
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
 
 
     

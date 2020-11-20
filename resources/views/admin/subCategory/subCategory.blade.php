@@ -25,10 +25,12 @@
       <th scope="row">{{$Subcategory->name}}</th>
       <th scope="col">{{ $Subcategory->subCategoryBelongs->name}}</th>
       <td>
-      <form action="{{route('subcategory.delete', [$Subcategory])}}" method="post">
-      @csrf
-      <button type="submit">Delete</button>
-      </form>
+     
+
+      <button type="button" class="btn btn-danger" data-toggle="modal"  onclick="deletemodel({{$Subcategory->id}})" data-target="#delete-model">
+        Delete
+      </button>
+
       <form action="{{route('subcategory.edit', [$Subcategory])}}" method="get">
       <button type="submit">edit</button>
       </form>
@@ -71,4 +73,50 @@
   </div>
 </div>
 
+<!--Delete Modal -->
+<div class="modal fade" id="delete-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        <form action="{{route('subcategory.delete')}}" method="post">
+      @csrf
+       <input type="hidden" name='category_id' type="text">
+      <button type="submit">Delete</button>
+      </form>
+
+
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection
+
+
+@section('scripts')
+<script type="text/javascript">
+            $(document).ready( function () {
+                $('#dtBasicExample').DataTable();
+            } );
+                </script>
+
+<script>
+       function deletemodel(id){
+     $('input[name ="category_id"]').val(id) ;
+       
+        }
+    </script>
 @endsection

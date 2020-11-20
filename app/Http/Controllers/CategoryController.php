@@ -97,8 +97,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function delete(Category $category)
+    public function delete(Request $request)
     {
+        $category = Category::where('id', $request->category_id)->first();
         if($category->categoryAllSub->count()){
             return redirect()->route('category');
         }

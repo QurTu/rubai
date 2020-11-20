@@ -28,12 +28,13 @@
       <th scope="col">{{ $Subcategory->subSubCategoryBelongsSubCategory->name}}</th>
       <th scope="col">{{ $Subcategory->subSubCategoryBelongsCategory->name}}</th>
       <td>
-      <form action="{{route('subsubcategory.delete', [$Subcategory])}}" method="post">
-      @csrf
-      <button type="submit">Delete</button>  
-      </form>
+      
       <form action="{{route('subsubcategory.edit', [$Subcategory])}}" method="get">
       <button type="submit">edit</button>
+
+      <button type="button" class="btn btn-danger" data-toggle="modal"  onclick="deletemodel({{$Subcategory->id}})" data-target="#delete-model">
+        Delete
+      </button>
       </form>
       </td>
     </tr>
@@ -83,6 +84,39 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+<!--Delete Modal -->
+<div class="modal fade" id="delete-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{{route('subsubcategory.delete')}}" method="post">
+        <input type="hidden" name='category_id' type="text">
+      @csrf
+      <button type="submit">Delete</button>  
+      </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript">
       $(document).ready(function(){
         let category_id =  $('select[name="category_id"]').val();
@@ -128,4 +162,10 @@
 
  </script>
 
+<script>
+       function deletemodel(id){
+     $('input[name ="category_id"]').val(id) ;
+       
+        }
+    </script>
 @endsection
