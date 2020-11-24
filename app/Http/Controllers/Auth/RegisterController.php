@@ -41,7 +41,12 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-       
+         if(Auth::check() && Auth::user()->role_id == 1) {
+            $this->redirectTo = route('admin.home');  
+       } else {
+        $this->redirectTo = route('home');
+       }
+
         $this->middleware('guest');
      
     }
