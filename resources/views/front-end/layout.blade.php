@@ -188,7 +188,7 @@
                     <div class="col-md-8 mb-3">
                         <div class="main-menu">
                             <a href="">Susisiekti</a>
-                            <a href="{{route('shop')}}">Visos prekes</a>                          
+                            <a href="{{route('shop')}}">Visos prekes</a>                           
                         </div>
                     </div>
                 </div>
