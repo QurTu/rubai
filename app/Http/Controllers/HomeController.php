@@ -75,7 +75,7 @@ class HomeController extends Controller
     }
    }
    public function accept() {
-       $this->PaymentAccept();
+       $this->PaymentAccept(); // callback  remove in real website
        echo 'bybys1';
 
    }
@@ -121,7 +121,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($modelActive = 0)
     {
         
         
@@ -130,7 +130,7 @@ class HomeController extends Controller
           $categorie =  $categorie->products;
         }
        
-        return view('front-end.home', \compact( 'categoriesWithProducts' ));
+        return view('front-end.home', \compact( 'categoriesWithProducts', 'modelActive'));
     }
 
 

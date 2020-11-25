@@ -1,555 +1,216 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Single Product</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="OneTech shop project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/bootstrap4/bootstrap.min.css')}}">
-<link href="{{ asset('frontend/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/animate.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_styles.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_responsive.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/cart_styles.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/cart_responsive.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/contact_styles.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/contact_responsive.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/shop_styles.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/shop_responsive.css')}}">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('front-end/css/main.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="{{ asset('front-end/fontawesome/css/all.css')}}" rel="stylesheet">
+    <!--load all styles -->
+    <link rel="stylesheet" href="{{ asset('front-end/mega/css/reset.css')}}">
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="{{ asset('front-end/mega/css/style.css')}}">
+    <!-- Resource style -->
 </head>
 
 <body>
-
-<div class="super_container">
-	
-	<!-- Header -->
-	
-	<header class="header">
-
-		<!-- Top Bar -->
-
-		<div class="top_bar">
-			<div class="container">
-				<div class="row">
-					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
-						<div class="top_bar_content ml-auto">
-						
-						@guest
-							<div class="top_bar_user">
-								<div class="user_icon"><img src="images/user.svg" alt=""></div>
-								<div><a href="{{route('register')}}">Register</a></div>
-								<div><a href="{{route('login')}}">Sign in</a></div>
-							</div>
-						@endguest
-
-						@auth
-						<div class="top_bar_user">
-								<div class="user_icon"><img src="images/user.svg" alt=""></div>
-								<form action="{{route('logout')}}" method="post">
+    <!-- upper hero -->
+    <!-- guest  -->
+@guest
+    <div class="login-border">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="logins">
+                        <a class="loginas" href="{{route('login')}}">Login</a>
+                        <a class="loginas" href="{{route('register')}}">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	@endguest
+    <!-- for user -->
+	@auth
+    <div class="login-border">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="logins">
+                        <div class="dropdown">
+                            <i class="fas fa-user"></i>
+                            <div class="loginas2">{{Auth::user()->name}}</div>
+                            <div class="dropdown-content profile">
+                                <a class="profile-link" href="#">Link 1</a>
+								<a class="profile-link" href="#">Link 2</a>
+								 <form action="{{route('logout')}}" method="post">
 								@csrf
 								<button type="submit">   Log Out</button>
 								</form>
-							</div>					
-								@endauth
+                               </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	@endauth
 
-						</div>
-					</div>
-				</div>
-			</div>		
-		</div>
+    <!-- search section -->
+    <div class="container">
+        <div class="row  row-search">
+            <div class="col-md-6 mb-3">
+                <div class="header_search">
+                    <div class="header_search_content">
+                        <div class="header_search_form_container">
+                            <form action="{{route('search')}}" class="header_search_form clearfix" method="get">
+								<input type="search" class="header_search_input" placeholder="Ieškoti produktu...">								                                                                 
+                                <button type="submit" class="header_search_button trans_300" value="search"><img src="{{ asset('front-end/img/search.png')}}" alt=""></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		<!-- Header Main -->
+            <!-- cart/wishlist -->
+            <div class="col-3  cart-wishlist">
+                <div class="dropdown">
+                    <a href="">
+                        <div class="wishlist">
+                            <i class="far fa-heart"></i>
+                            <div>
+                                <div class="cart-first-word">Patikusios </div>
+                                <div class="cart-second-word">prekės </div>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="item">
+                            <img src="./img/adv_1.png" alt="koja">
+                            <a href=""> nameddddddddddddddddd
+                          dddddddddddddddd<span>(1)</span> </a>
+                            <button class="remove-from-cart">     <i class="fas fa-times"></i> </button>
+                        </div>
+                       
+                        <div class="cartinfo">
+                            Įsidėjote <span>1</span> prekių už <span>150€</span>
+                        </div>
+                        <button class="cart-button"><a href="">Patikusiu preikiu sarasas</a></button>
 
-		<div class="header_main">
-			<div class="container">
-				<div class="row">
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <a href="">
+                    <div class="dropdown">
+                        <div class="cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <div>
+                                <div class="cart-first-word">Prekių </div>
+                                <div class="cart-second-word">Krepšelis </div>
+                </a>
+                <div class="dropdown-content">
+                    <div class="item">
+                        <img src="./img/adv_1.png" alt="koja">
+                        <a href=""> nameddddddddddddddddd
+                          dddddddddddddddd<span>(1)</span> </a>
+                        <button class="remove-from-cart">     <i class="fas fa-times"></i> </button>
+                    </div>
+               
+                    <div class="cartinfo">
+                        Įsidėjote <span>1</span> prekių už <span>150€</span>
+                    </div>
+                    <button class="cart-button"><a href="">Pirkti prekias</a></button>
 
-					<!-- Logo -->
-					<div class="col-lg-2 col-sm-3 col-3 order-1">
-						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
-						</div>
-					</div>
+                </div>
+                </div>
 
-					<!-- Search -->
-				
+                </div>
+                </div>
+            </div>
 
-					<!-- Wishlist -->
-					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
-						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-								<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
-								<div class="wishlist_content">
-									<div class="wishlist_text"><a href="{{route('wishlist')}}">Wishlist</a></div>
-									<div class="wishlist_count">115</div>
-								</div>
-							</div>
+        </div>
+    </div>
+    <!-- menu -->
 
-							<!-- Cart -->
-							<div class="cart">
-								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
-									<div class="cart_icon">
-										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span>10</span></div>
-									</div>
-									<div class="cart_content">
-										<div class="cart_text"><a href="{{route('cart')}}">Cart</a></div>
-										<div class="cart_price">$85</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Main Navigation -->
-		<nav class="main_nav">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						
-						<div class="main_nav_content d-flex flex-row">
 
-						                                  	<!-- Categories Menu -->
 
-							<div class="cat_menu_container">
-								<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
-									<div class="cat_burger"><span></span><span></span><span></span></div>
-									<div class="cat_menu_text">Kategorijos</div>
-								</div>
-
-								<ul class="cat_menu">										
+    <div class=" menu-cont ">
+        <div class="menu-border">
+            <div class="container ">
+                <!-- category -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="cd-dropdown-wrapper">
+                            <a class="cd-dropdown-trigger" href="#0">Kategorijos</a>
+                            <nav class="cd-dropdown">
+                                <h2>Kategorijos</h2>
+                                <a href="#0" class="cd-close">Close</a>
+                                <ul class="cd-dropdown-content">
 								@foreach($categories as $category)
-									<li class="hassubs">
-										<a href="{{route('search.category', $category->id )}}">{{$category->name}}<i class="fas fa-chevron-right"></i></a>
-										<ul>
-										@foreach($subCategories as $sub)
-										@if($sub->category_id == $category->id) 
-											<li class="hassubs">
-												<a href="{{route('search.subcategory', $sub->id )}}">{{$sub->name}}<i class="fas fa-chevron-right"></i></a>
-												<ul>
-												@foreach($subSubCategories as $subsub)
-												@if($subsub->sub_category_id == $sub->id )
+                                    <li class="has-children">
+                                        <a class="katmenu" href="{{route('search.category', $category->id )}}">{{$category->name}}</a>
+                                        <ul class="cd-secondary-dropdown is-hidden">
+                                            <li class="go-back"><a class="katmenu" href="#0">Menu</a></li>
+											<li class="see-all"><a class="katmenu" href="{{route('search.category', $category->id )}}">Visos {{$category->name}}</a></li>
+											@foreach($subCategories as $sub)
+										    	@if($sub->category_id == $category->id) 
+                                            <li class="has-children">
+												<a href="{{route('search.subcategory', $sub->id )}}">{{$sub->name}}</a>
 												
-													<li><a href="{{route('search.subsubcategory', $subsub->id )}}"><i class="fas fa-chevron-right"> </i> {{$subsub->name}}</a></li>
-												@endif
+                                                <ul class="is-hidden">
+                                                    <li class="go-back"><a class="katmenu" href="#0">Clothing</a></li>
+													<li class="see-all"><a class="katmenu" href="{{route('search.subcategory', $sub->id )}}">Visi {{$sub->name}}</a></li>
+													@foreach($subSubCategories as $subsub)
+												@if($subsub->sub_category_id == $sub->id )
+													<li><a class="katmenu" href="{{route('search.subsubcategory', $subsub->id )}}">{{$subsub->name}}</a></li>
+													@endif
 												@endforeach
-												</ul>
-												@endif
+                                                </ul>
 											</li>
+											@endif
 											@endforeach
-										</ul>
+                                        </ul>
+                                        <!-- .cd-secondary-dropdown -->
 									</li>
 									@endforeach
-								</ul>
-							</div>
+                                    <!-- .has-children -->
+                                </ul>
+                                <!-- .cd-dropdown-content -->
+                            </nav>
+                            <!-- .cd-dropdown -->
+                        </div>
+                        <!-- .cd-dropdown-wrapper -->
+                    </div>
+                    <!-- menu-near category -->
+                    <div class="col-md-8 mb-3">
+                        <div class="main-menu">
+                            <a href="">Susisiekti</a>
+                            <a href="{{route('shop')}}">Visos prekes</a>                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-							<!-- Main Nav Menu -->
+    <!-- Header section END-->
+    <!-- CONTENT section START-->
 
-							<div class="main_nav_menu ml-auto">
-								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-									<li class="hassubs">
-										<a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li>
-												<a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">Featuredd Brands<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li>
-												<a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-											<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-										</ul>
-									</li>
-									<li><a href="blog.html">Blddog<i class="fas fa-chevron-down"></i></a></li>
-									<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-								</ul>
-							</div>
+@yield('content')
 
-							<!-- Menu Trigger -->
+   
 
-							<div class="menu_trigger_container ml-auto">
-								<div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-									<div class="menu_burger">
-										<div class="menu_trigger_text">menu</div>
-										<div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
-									</div>
-								</div>
-							</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
-		
-		<!-- Menu -->
-		<div class="page_menu">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						
-						<div class="page_menu_content">
-							
-							<div class="page_menu_search">
-								<form action="#">
-									<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
-								</form>
-							</div>
-							<ul class="page_menu_nav">
-								<li class="page_menu_item has-children">
-									<a href="#">Language<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Currency<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item">
-									<a href="#">Home<i class="fa fa-angle-down"></i></a>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-										<li class="page_menu_item has-children">
-											<a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
-											<ul class="page_menu_selection">
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											</ul>
-										</li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-								<li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
-							</ul>
-							
-							<div class="menu_contact">
-								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/phone_white.png" alt=""></div>+38 068 005 3570</div>
-								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
-    <!-- CONTENT -->
-
-    @yield('content')
-
-	
-	<!-- Recently Viewed -->
-	<div class="viewed">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="viewed_title_container">
-						<h3 class="viewed_title">Recently Viewed</h3>
-						<div class="viewed_nav_container">
-							<div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
-							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
-						</div>
-					</div>
-
-					<div class="viewed_slider_container">
-						
-						<!-- Recently Viewed Slider -->
-
-						<div class="owl-carousel owl-theme viewed_slider">
-							
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_1.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$225<span>$300</span></div>
-										<div class="viewed_name"><a href="#">Beoplay H7</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_2.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$379</div>
-										<div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_3.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$225</div>
-										<div class="viewed_name"><a href="#">Samsung J730F...</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_4.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$379</div>
-										<div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_5.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$225<span>$300</span></div>
-										<div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_6.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$375</div>
-										<div class="viewed_name"><a href="#">Speedlink...</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Footer -->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-3 footer_col">
-					<div class="footer_column footer_contact">
-						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
-						</div>
-						<div class="footer_title">Got Question? Call Us 24/7</div>
-						<div class="footer_phone">+38 068 005 3570</div>
-						<div class="footer_contact_text">
-							<p>17 Princess Road, London</p>
-							<p>Grester London NW18JR, UK</p>
-						</div>
-						<div class="footer_social">
-							<ul>
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fab fa-google"></i></a></li>
-								<li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-2 offset-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Find it Fast</div>
-						<ul class="footer_list">
-							<li><a href="#">Computers & Laptops</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Smartphones & Tablets</a></li>
-							<li><a href="#">TV & Audio</a></li>
-						</ul>
-						<div class="footer_subtitle">Gadgets</div>
-						<ul class="footer_list">
-							<li><a href="#">Car Electronics</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<ul class="footer_list footer_list_2">
-							<li><a href="#">Video Games & Consoles</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Computers & Laptops</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Customer Care</div>
-						<ul class="footer_list">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">Order Tracking</a></li>
-							<li><a href="#">Wish List</a></li>
-							<li><a href="#">Customer Services</a></li>
-							<li><a href="#">Returns / Exchange</a></li>
-							<li><a href="#">FAQs</a></li>
-							<li><a href="#">Product Support</a></li>
-						</ul>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</footer>
-	<!-- Copyright -->
-
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					
-					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</div>
-						<div class="logos ml-sm-auto">
-							<ul class="logos_list">
-								<li><a href="#"><img src="images/logos_1.png" alt=""></a></li>
-								<li><a href="#"><img src="images/logos_2.png" alt=""></a></li>
-								<li><a href="#"><img src="images/logos_3.png" alt=""></a></li>
-								<li><a href="#"><img src="images/logos_4.png" alt=""></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script src="{{ asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{ asset('frontend/styles/bootstrap4/popper.js')}}"></script>
-<script src="{{ asset('frontend/styles/bootstrap4/bootstrap.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/greensock/TweenMax.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/greensock/TimelineMax.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/greensock/animation.gsap.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
-<script src="{{ asset('frontend/plugins/easing/easing.js')}}"></script>
-<script src="{{ asset('frontend/js/product_custom.js')}}"></script>
-<script src="{{ asset('frontend/js/cart_custom.js')}}"></script>
-<script src="{{ asset('frontend/js/contact_custom.js')}}"></script>
-
-<script src="{{ asset('frontend/plugins/Isotope/isotope.pkgd.min.js')}}"></script>
-<script src="{{ asset('frontend/plugins/jquery-ui-1.12.1.custom/jquery-ui.js')}}"></script>
-<script src="{{ asset('frontend/plugins/parallax-js-master/parallax.min.js')}}"></script>
-<script src="{{ asset('frontend/js/shop_custom.js')}}"></script>
+    <script src="{{ asset('front-end/mega/js/jquery.menu-aim.js')}}"></script>
+    <script src="{{ asset('front-end/mega/js/main1.js')}}"></script>
+    <!-- menu aim  rasyti main2 jei home routas-->
 @yield('scripts')
 </body>
 
