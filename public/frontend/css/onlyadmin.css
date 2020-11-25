@@ -1,0 +1,29 @@
+.admin-only-container {
+    display: inline-block;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    border: solid red 1px;
+    background-color: white;
+    border-radius: 10px;
+    width: 50%;
+    z-index: 10;
+    transform: 200ms ease-in-out;
+    text-align: center;
+}
+
+.admin-only-container i {
+    font-size: 100px;
+    margin-top: 20px;
+}
+
+.admin-only-container button {
+    padding: 10px 50px;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.admin-only-container button:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,28 @@
+.shipping-add {
+    margin-top: 50px;
+    text-align: start;
+}
+
+.shipping-add h1 {
+    font-size: 30px;
+    padding-bottom: 30px;
+    font-weight: bold;
+}
+
+.pristatymo-duomenys {
+    border-bottom: #666 1px solid;
+    margin-bottom: 10px;
+}
+
+.shipping-person-details {
+    margin-left: 20px;
+}
+
+.shipping-person {
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.shipping-person span {
+    font-weight: normal;
+}

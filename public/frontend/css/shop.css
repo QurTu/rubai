@@ -1,0 +1,93 @@
+.shop {
+    margin-top: 50px;
+}
+
+.shop-category h2 {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 0 25px;
+}
+
+.shop-category a {
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 5px 30px 0;
+    color: #555;
+}
+
+.shop-items-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin: 0;
+}
+
+.shop-item {
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.shop-item:hover {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .3);
+}
+
+.shop-item h2 {
+    color: black;
+    padding: 0 10px 30px;
+}
+
+.shop-item h2:hover {
+    text-decoration: underline;
+}
+
+.price-filer {
+    margin-top: 50px;
+}
+
+.sort-container {
+    position: relative;
+    height: 30px;
+}
+
+.sort {
+    position: absolute;
+    top: 0;
+    right: 30px;
+}
+
+.price-filer h2 {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 0 70px;
+}
+
+.shop-add-to-cart-btn {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    width: 90%;
+    line-height: 15px;
+    padding: 5px 0;
+}
+
+.shop-model h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.shop-model img {
+    width: 40%;
+    margin: 10px 30%;
+}
+
+.shop-model h3 {
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}

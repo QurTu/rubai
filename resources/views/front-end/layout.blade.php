@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('front-end/css/main.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/main.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="{{ asset('front-end/fontawesome/css/all.css')}}" rel="stylesheet">
+    <link href="{{ asset('frontend/fontawesome/css/all.css')}}" rel="stylesheet">
     <!--load all styles -->
-    <link rel="stylesheet" href="{{ asset('front-end/mega/css/reset.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/mega/css/reset.css')}}">
     <!-- CSS reset -->
-    <link rel="stylesheet" href="{{ asset('front-end/mega/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/mega/css/style.css')}}">
     <!-- Resource style -->
 </head>
 
@@ -69,7 +69,7 @@
                         <div class="header_search_form_container">
                             <form action="{{route('search')}}" class="header_search_form clearfix" method="get">
 								<input type="search" class="header_search_input" placeholder="Ieškoti produktu...">								                                                                 
-                                <button type="submit" class="header_search_button trans_300" value="search"><img src="{{ asset('front-end/img/search.png')}}" alt=""></button>
+                                <button type="submit" class="header_search_button trans_300" value="search"><img src="{{ asset('frontend/img/search.png')}}" alt=""></button>
                             </form>
                         </div>
                     </div>
@@ -208,8 +208,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-    <script src="{{ asset('front-end/mega/js/jquery.menu-aim.js')}}"></script>
-    <script src="{{ asset('front-end/mega/js/main1.js')}}"></script>
+    <script src="{{ asset('frontend/mega/js/jquery.menu-aim.js')}}"></script>
+    <script src="{{ asset('frontend/mega/js/main1.js')}}"></script>
     <!-- menu aim  rasyti main2 jei home routas-->
 @yield('scripts')
 </body>

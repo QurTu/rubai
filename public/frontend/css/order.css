@@ -1,0 +1,14 @@
+.order-container h1 {
+    margin-top: 50px;
+    font-size: 30px;
+    padding-bottom: 30px;
+    font-weight: bold;
+}
+
+.order-details h1 {
+    text-align: center;
+    padding-bottom: 20px;
+    line-height: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
