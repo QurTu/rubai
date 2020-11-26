@@ -69,6 +69,9 @@ Route::get('/order', 'HomeController@order')->name('order');
 
                                     //  admin routes
 Route::get('/admin', 'AdminController@index')->name('admin.home');
+
+
+Route::get('/denide ', 'ShippingController@noAccess')->name('noAccess');
      // Category routes
      Route::get('admin/category', 'CategoryController@index')->name('category');
      Route::post('admin/category/add', 'CategoryController@add')->name('category.add');

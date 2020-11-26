@@ -19,7 +19,7 @@ class AdminMiddleware
         if(Auth::check() && Auth::user()->role_id == 1) {
             return $next($request);     
        }elseif(Auth::check() && Auth::user()->role_id == 2) {
-        return \redirect(route('cart'));
+        return \redirect('denide');
         } else {
            return \redirect(route('login'));
         
