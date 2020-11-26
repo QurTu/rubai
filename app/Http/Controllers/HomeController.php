@@ -17,6 +17,7 @@ use App\ProductVariant;
 use App\ProductVariantOption;
 use App\UniqueProduct;
 use Auth;
+use Session;
 use App\Libs\WebToPay;
 use RecentlyViewed\Models\Contracts\Viewable;
 class HomeController extends Controller
@@ -28,12 +29,17 @@ class HomeController extends Controller
      * @return void
      */
    public function moketi(){
+       
+      
     $cart = Cart::instance('cart')->content();
     $shipping = Shipping::where('user_id', Auth::id())->first();
     $order = new Order();
     $order->payment = 'paysera';
     $order->how_ship = 'kurjeris';
-    $order->price = Cart::subtotal();
+    // price work
+     $price =str_replace(",", "",Cart::instance('cart')->subtotal());
+     $price = floatval ( $price) ;
+    $order->price =  $price;
     $order->status = 1;
     $order->user_id = Auth::id();
     $order->shipping_id = $shipping->id;
@@ -76,11 +82,13 @@ class HomeController extends Controller
    }
    public function accept() {
        $this->PaymentAccept(); // callback  remove in real website
-       echo 'bybys1';
+       Session::put('payment', 1);
+      return redirect(route('home'));
 
    }
    public function cancel() {
-    echo 'bybys2';
+    Session::put('payment', 0);
+    return redirect(route('home'));
 
 }
 
@@ -121,20 +129,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index($modelActive = 0)
+    public function index(Request $request)
     {
-        
-        
+            
         $categoriesWithProducts = Category::all()->take(2);
         foreach($categoriesWithProducts as $categorie) {
           $categorie =  $categorie->products;
         }
-       
-        return view('front-end.home', \compact( 'categoriesWithProducts', 'modelActive'));
+        $payment = 10;
+        if(Session::has('payment')) {
+            $payment = Session::get('payment');
+            $request->session()->forget('payment');
+          }  
+        return view('front-end.home', \compact( 'categoriesWithProducts', 'payment'));
     }
 
 
-    public function product($id)
+    public function product($id , Request $request)
     {
         //product info
         $product = Product::where('id', $id)->first();
@@ -169,8 +180,11 @@ class HomeController extends Controller
             }
             $variant->options = $optArray;
         }
-      
+       
         
+
+       
+
         return view('front-end.product', \compact( 'products', 'productVariant' ));
     }
 
@@ -231,27 +245,27 @@ class HomeController extends Controller
                                      // Shop Pages 
      public function shop()
     {    
-        $products = Product::paginate(25);
+        $products = Product::paginate(24);
         return view('front-end.shop', \compact( 'products'  ));
     }                                         
     public function searchCat($id) {
         $subCats = SubCategory::where('id' , $id)->get();
-        $products = Product::where('category_id', $id)->paginate(25);
+        $products = Product::where('category_id', $id)->paginate(24);
         return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     public function searchSubCat($id) {  
         $subCats = SubSubCategory::where('id' , $id)->get();
-        $products = Product::where('sub_category_id', $id)->paginate(25);
+        $products = Product::where('sub_category_id', $id)->paginate(24);
         return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     public function searchSubSubCat($id) {
         $subCats = SubSubCategory::where('id' , $id)->get();
-        $products = Product::where('sub_sub_category_id', $id)->paginate(25);
+        $products = Product::where('sub_sub_category_id', $id)->paginate(24);
         return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
     public function search(Request $request){
         
-        $products = Product::where('name', 'like', "%$request->search%")   ->paginate(25);
+        $products = Product::where('name', 'like', "%$request->search%")->paginate(24);
         $subCats = Category::all();
          return view('front-end.shop', \compact( 'products', 'subCats' ));
     }
@@ -267,6 +281,22 @@ class HomeController extends Controller
         return \redirect()->back();
     }
     
+    public static function order() {
+
+      Cart::instance('cart')->count();   
+        if(Cart::instance('cart')->count()   == 0) {
+            return redirect(route('cart'));
+        }
+        if(Session::has('shipping')) {
+          $shipping = Session::get('shipping');
+        return view("front-end.order", compact('shipping'));  
+        }else {
+            return redirect(route('shipping'));
+        }
+
+
+        
+    }
 
 }
 

@@ -26,4 +26,72 @@
 </div>
 @endforeach
 
+@if($payment == 1)
+<!-- Thanks for buying model -->
+<div class="modal fade" id="thanksMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Užsakymą gavome</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+
+                    <h1>Ačiū, kad pirkote!!!</h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Uždaryti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        cancel
+      </button>
+	  @if($payment == 0)
+    <!-- cancel payment model-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Įvyko Klaida</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <h1>Apmokant įvyko klaida arba mokėjimas buvo nutrauktas</h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Uždaryti</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+	@endif
+	
+@endsection
+
+@section('scripts')
+@if($payment == 1)
+<script type="text/javascript">
+        $(window).on('load', function() {
+            $('#thanksMessage').modal('show');
+            console.log('wroks')
+        });
+	</script>
+	@endif
+	  @if($payment == 0)
+	<script type="text/javascript">
+        $(window).on('load', function() {
+            $('#exampleModalCenter').modal('show');
+            console.log('wroks')
+        });
+    </script>
+		@endif
 @endsection

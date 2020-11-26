@@ -52,9 +52,16 @@ Route::get('/shop/subsubcategory/{id}', 'HomeController@searchSubSubCat')->name(
 //shipping
 Route::get('/shipping', 'ShippingController@shipping')->name('shipping');
 Route::post('/shipping/add', 'ShippingController@add')->name('shipping.add');
-Route::get('/shipping/edit/{shipping}', 'ShippingController@edit')->name('shipping.edit');
-Route::post('/shipping/update/{shipping}', 'ShippingController@update')->name('shipping.update');
-Route::post('/shipping/delete/{shipping}', 'ShippingController@delete')->name('shipping.delete');
+Route::post('/shipping/fromList', 'ShippingController@fromList')->name('shipping.fromList');
+//Route::get('/shipping/edit/{shipping}', 'ShippingController@edit')->name('shipping.edit');
+//Route::post('/shipping/update/{shipping}', 'ShippingController@update')->name('shipping.update');
+//Route::post('/shipping/delete/{shipping}', 'ShippingController@delete')->name('shipping.delete');
+
+//ORDER
+Route::get('/order', 'HomeController@order')->name('order');
+
+
+
 
 
 

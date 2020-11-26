@@ -3,117 +3,199 @@
 
 
 @section('content')
-	<div class="shop">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-
-					<!-- Shop Sidebar -->
-					<div class="shop_sidebar">
-						<div class="sidebar_section">
-							<div class="sidebar_title">Categories</div>
-							<ul class="sidebar_categories">
-							@if(Route::current()->getName() == 'search.category')
+      <!-- CONTENT section START-->
+	  <div class="container shop">
+        <div class="row">
+            <div class="col-3">
+                <div class="shop-category">
+					<h2>Kategorijos</h2>
+					@if(Route::current()->getName() == 'search.category')
 							@foreach($subCats as $subC)
-									<li class="hassubs">
-									<a href="{{route('search.subcategory', $subC->id )}}">{{$subC->name}}<i class="fas fa-chevron-right"></i></a>
+									
+									<a href="{{route('search.subcategory', $subC->id )}}">{{$subC->name}}</a>
 										@endforeach
 							@elseif(Route::current()->getName() == 'search.subcategory')	
 							@foreach($subCats as $subC)
-									<li class="hassubs">
-									<a href="{{route('search.subsubcategory', $subC->id )}}">{{$subC->name}}<i class="fas fa-chevron-right"></i></a>
+								
+									<a href="{{route('search.subsubcategory', $subC->id )}}">{{$subC->name}}</a>
 										@endforeach
 
 										@elseif(Route::current()->getName() == 'search.subsubcategory')	
 							@foreach($subCats as $subC)
-									<li class="hassubs">
-									<a href="{{route('search.subsubcategory', $subC->id )}}">{{$subC->name}}<i class="fas fa-chevron-right"></i></a>
+								
+									<a href="{{route('search.subsubcategory', $subC->id )}}">{{$subC->name}}</a>
 										@endforeach
 										
 							@else
 							@foreach($categories as $subC)
-									<li class="hassubs">
-									<a href="{{route('search.category', $subC->id )}}">{{$subC->name}}<i class="fas fa-chevron-right"></i></a>
+									
+									<a href="{{route('search.category', $subC->id )}}">{{$subC->name}}</a>
 										@endforeach
 							@endif
 
+                </div>
+                <div class="price-filer">
+                    <h2>Kainos filtras:</h2>
+                    <input type="text" id="sampleSlider" />
+                </div>
 
 
-							
-							</ul>
-						</div>
-						<div class="sidebar_section filter_by_section">
-							<div class="sidebar_title">Filter By</div>
-							<div class="sidebar_subtitle">Price</div>
-							<div class="filter_price">
-								<div id="slider-range" class="slider_range"></div>
-								<p>Range: </p>
-								<p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-							</div>
-						</div>
-						
-					
-					</div>
 
-				</div>
 
-				<div class="col-lg-9">
-					
-					<!-- Shop Content -->
+            </div>
+            <div class="col-9">
+                <div class="sort-container">
+                    <select class="sort" name="sort" id="">
+                                      <option disabled selected>Rušiuoti pagal:</option>
+                                     <option data-sort="price:asc">Pigiausia viršuje</option>
+                                    <option data-sort="price:desc">Brangiausia viršuje</option>
+                                </select>
+                </div>
+                <div class="shop-items-container">
 
-					<div class="shop_content">
-						<div class="shop_bar clearfix">
-							<div class="shop_product_count"><span>186</span> products found</div>
-							<div class="shop_sorting">
-								<span>Sort by:</span>
-								<ul>
-									<li>
-										<span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
-										<ul>
-											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
-											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
-											<li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
-										</ul>
-									</li>
-								</ul>
-							</div>
-						</div>
+				@foreach($products as $product)
+				<div class="shop-item" data-price="{{(integer)$product->price}}">
+                        <a class="" href="{{route('product.list', $product->id)}}">
+                            <img src="{{asset('images/' . $product->image)}}" alt="">
+                            <div class="kaina-item"> {{$product->price}}</div>
+                            <h2> {{$product->name}}</h2>
+                        </a>
+                        <!-- <button type="button" class="shop-add-to-cart-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                Į Krepšelį
+                                              </button> -->
+                    </div>
+				@endforeach
 
-						<div class="product_grid">
-							<div class="product_grid_border"></div>
+                    
 
-						
-						
+                
 
-							@foreach($products as $product)
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center">
-								<a href="{{route('product.list', $product->id)}}">   <img src="{{asset('images/' . $product->image)}}" alt=""> </a>  </div>
-								<div class="product_content">
-									<div class="product_price">{{$product->price}}</div>
-									<div class="product_name"><div><a href="{{route('product.list', $product->id)}}" tabindex="0">{{$product->name}}
-									</div></div>
-									</a>
-								</div>
-								
-								
-							</div>
-							@endforeach
-						</div>
+                   
+                 
 
-						<!-- Shop Page Navigation -->
 
-						{{$products->links()}}
 
-						
 
-					</div>
 
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+                </div>
+                {{$products->links()}}
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- Modal -->
+  
+    <!-- show Kategory section-->
+
 
 @endsection
+
+@section('scripts')
+
+<script>
+        $( document ).ready(function($) {
+            "use strict";
+
+            $.fn.numericFlexboxSorting = function(options) {
+                const settings = $.extend({
+                    elToSort: ".shop-items-container .shop-item"
+                }, options);
+
+                const $select = $('select[name ="sort"]')
+                const ascOrder = (a, b) => a - b;
+                const descOrder = (a, b) => b - a;
+
+                $select.on("change", () => {
+                    const selectedOption = $select.find("option:selected").attr("data-sort");
+                    sortColumns(settings.elToSort, selectedOption);
+                });
+
+                function sortColumns(el, opt) {
+					
+                    const attr = "data-" + opt.split(":")[0];
+                    const sortMethod = (opt.includes("asc")) ? ascOrder : descOrder;
+                    const sign = (opt.includes("asc")) ? "" : "-";
+
+                    const sortArray = $(el).map((i, el) => $(el).attr(attr)).sort(sortMethod);
+
+                    for (let i = 0; i < sortArray.length; i++) {
+						console.log( $(el).filter(`[${attr}="${sortArray[i]}"]`));
+						
+
+                        $(el).filter(`[${attr}="${sortArray[i]}"]`).css("order", sign + sortArray[i]);
+                    }
+                }
+				
+                return $select;
+            };
+		$(".b-select").numericFlexboxSorting();	
+        }
+		
+		);
+
+        // call the plugin
+		
+        
+    </script>
+
+
+    <script src="{{ asset('frontend/range-slider/js/rSlider.min.js')}}"></script>
+    <script>
+        var mySlider = new rSlider({
+            target: '#sampleSlider',
+            values: {
+                min: 0,
+                max: 700
+            },
+            step: 1,
+            range: true,
+            set: [0, 700],
+            scale: true,
+            labels: false,
+            onChange: function(vals) {
+                let values = vals.split(",");
+                $(".shop-item").each(function(el) {
+                    let x = $(this).data('price');
+                    if (x >= values[0] && x <= values[1]) {
+                        $(this).show()
+                    } else {
+                        $(this).hide()
+                    }
+                })
+                let x = 90;
+                if (x >= values[0] && x <= values[1]) {}
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#form-control").prop("selectedIndex", -1);
+        });
+    </script>
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+	@endsection

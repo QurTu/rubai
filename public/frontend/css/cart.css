@@ -80,12 +80,17 @@
     color: #111;
 }
 
-.cart-item-price i {
-    top: 35px;
+.cart-remove {
+    top: 0px;
     right: 5px;
     position: absolute;
     font-size: 20px;
     color: #666;
+}
+
+.cart-remove button {
+    border: 0;
+    background: #fff;
 }
 
 .cart-item-price i:hover {

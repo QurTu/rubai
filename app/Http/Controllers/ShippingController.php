@@ -8,6 +8,7 @@ use App\SubSubCategory;
 use App\SubCategory;
 use App\Category;
 use Auth;
+use Session;
 
 class ShippingController extends Controller
 {
@@ -23,12 +24,10 @@ class ShippingController extends Controller
         $categories = Category::all();
 
         $shipping = Shipping::where('user_id' , Auth::id() )->get();
-        if($shipping->isNotEmpty()) {
-
             return view('front-end.buy.shippingDetails', compact('categories', 'subCategories', 'subSubCategories', 'shipping'));
-        }
-       
-        return view('front-end.buy.shippingAdd', compact('categories', 'subCategories', 'subSubCategories'));
+        
+    
+      
     }
 
 
@@ -51,7 +50,17 @@ class ShippingController extends Controller
         $shipping->email = $request->email;
         $shipping->save();
         
-        return  redirect()->route('shipping');
+        Session::put('shipping', $shipping);
+        return redirect()->route('order');
+
+
+    }
+    public function fromList(Request $request )
+    {
+        $shipping = Shipping::where('user_id' , Auth::id())->where('id', $request->shipping)->first();
+        Session::put('shipping', $shipping);
+        
+        return redirect()->route('order');
 
 
     }

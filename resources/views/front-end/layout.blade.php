@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/mega/css/reset.css')}}">
     <!-- CSS reset -->
     <link rel="stylesheet" href="{{ asset('frontend/mega/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/range-slider/css/rSlider.min.css')}}">
     <!-- Resource style -->
 </head>
 
@@ -68,7 +69,7 @@
                     <div class="header_search_content">
                         <div class="header_search_form_container">
                             <form action="{{route('search')}}" class="header_search_form clearfix" method="get">
-								<input type="search" class="header_search_input" placeholder="Ieškoti produktu...">								                                                                 
+								<input type="search" name='search' class="header_search_input" placeholder="Ieškoti produktu...">								                                                                 
                                 <button type="submit" class="header_search_button trans_300" value="search"><img src="{{ asset('frontend/img/search.png')}}" alt=""></button>
                             </form>
                         </div>
@@ -103,7 +104,7 @@
                     </div>
                     </div>
                 </div>
-                <a href="">
+                <a href="{{route('cart')}}">
                     <div class="dropdown">
                         <div class="cart">
                             <i class="fas fa-shopping-cart"></i>
@@ -112,17 +113,19 @@
                                 <div class="cart-second-word">Krepšelis </div>
                 </a>
                 <div class="dropdown-content">
+                @foreach($cart as $item)
                     <div class="item">
-                        <img src="./img/adv_1.png" alt="koja">
-                        <a href=""> nameddddddddddddddddd
-                          dddddddddddddddd<span>(1)</span> </a>
+                        <img src="{{asset('images/' . $item->options->image)}}" alt="koja">
+                        <a href=""> {{$item->name}}<span>({{$item->qty}})</span> </a>
+                        <div class="cart-remove"></div>
                         <button class="remove-from-cart">     <i class="fas fa-times"></i> </button>
                     </div>
-               
+                    @endforeach
+                    
                     <div class="cartinfo">
-                        Įsidėjote <span>1</span> prekių už <span>150€</span>
+                        Įsidėjote prekių už <span><?php echo Cart::subtotal(); ?>€</span>
                     </div>
-                    <button class="cart-button"><a href="">Pirkti prekias</a></button>
+                    <button class="cart-button"><a href="{{route('cart')}}">Pirkti prekias</a></button>
 
                 </div>
                 </div>
@@ -203,10 +206,10 @@
 
    
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/d3js/6.2.0/d3.min.js"></script>
 
     <script src="{{ asset('frontend/mega/js/jquery.menu-aim.js')}}"></script>
     <script src="{{ asset('frontend/mega/js/main1.js')}}"></script>
