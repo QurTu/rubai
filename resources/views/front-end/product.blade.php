@@ -45,7 +45,7 @@
                             maziausais galiams pasirinkimas 1
                         </div>
                     </div>
-                    <h2>56.56 €</h2>
+                    <h2>{{$product->price}}€</h2>
 					@csrf
 									<button type="submit" class="button cart_button">i Krepšelis</button>
                    

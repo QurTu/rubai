@@ -57,7 +57,7 @@
 				<div class="shop-item" data-price="{{(integer)$product->price}}">
                         <a class="" href="{{route('product.list', $product->id)}}">
                             <img src="{{asset('images/' . $product->image)}}" alt="">
-                            <div class="kaina-item"> {{$product->price}}</div>
+                            <div class="kaina-item"> {{$product->price}}€</div>
                             <h2> {{$product->name}}</h2>
                         </a>
                         <!-- <button type="button" class="shop-add-to-cart-btn" data-toggle="modal" data-target="#exampleModalCenter">
@@ -146,15 +146,19 @@
 
     <script src="{{ asset('frontend/range-slider/js/rSlider.min.js')}}"></script>
     <script>
+        let minVal = <?php echo json_decode( $priceMin ) ?>;
+        let maxVal = <?php echo json_decode( $priceMax ) ?>;
+     
+
         var mySlider = new rSlider({
             target: '#sampleSlider',
             values: {
-                min: 0,
-                max: 700
+                min: minVal,
+                max: maxVal
             },
             step: 1,
             range: true,
-            set: [0, 700],
+            set: [minVal, maxVal],
             scale: true,
             labels: false,
             onChange: function(vals) {

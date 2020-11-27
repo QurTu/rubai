@@ -149,7 +149,7 @@ class HomeController extends Controller
     {
         //product info
         $product = Product::where('id', $id)->first();
-        \RecentlyViewed\Facades\RecentlyViewed::add($product);
+      //  \RecentlyViewed\Facades\RecentlyViewed::add($product);
         $products = DB::table('products')
         ->join('categories', 'categories.id', '=' ,'products.category_id')
         ->join('sub_categories', 'sub_categories.id', '=' ,'products.sub_category_id')
@@ -246,28 +246,39 @@ class HomeController extends Controller
      public function shop()
     {    
         $products = Product::paginate(24);
-        return view('front-end.shop', \compact( 'products'  ));
+       $priceMin = $products->min('price');
+       $priceMax =  $products->max('price');
+        return view('front-end.shop', \compact( 'products','priceMin', 'priceMax'  ));
     }                                         
     public function searchCat($id) {
-        $subCats = SubCategory::where('id' , $id)->get();
+        $subCats = SubCategory::where('category_id' , $id)->get();
         $products = Product::where('category_id', $id)->paginate(24);
-        return view('front-end.shop', \compact( 'products', 'subCats' ));
+        $priceMin = $products->min('price');
+        $priceMax =  $products->max('price');
+        return view('front-end.shop', \compact( 'products', 'subCats', 'priceMin', 'priceMax' ));
     }
     public function searchSubCat($id) {  
-        $subCats = SubSubCategory::where('id' , $id)->get();
+        $subCats = SubSubCategory::where('sub_category_id' , $id)->get();      
         $products = Product::where('sub_category_id', $id)->paginate(24);
-        return view('front-end.shop', \compact( 'products', 'subCats' ));
+        $priceMin = $products->min('price');
+        $priceMax =  $products->max('price');
+        return view('front-end.shop', \compact( 'products', 'subCats' , 'priceMin', 'priceMax'));
     }
     public function searchSubSubCat($id) {
-        $subCats = SubSubCategory::where('id' , $id)->get();
+        $subCats = SubSubCategory::where('sub_category_id' , $id)->get();
+        
         $products = Product::where('sub_sub_category_id', $id)->paginate(24);
-        return view('front-end.shop', \compact( 'products', 'subCats' ));
+        $priceMin = $products->min('price');
+        $priceMax =  $products->max('price');
+        return view('front-end.shop', \compact( 'products', 'subCats', 'priceMin', 'priceMax' ));
     }
     public function search(Request $request){
         
         $products = Product::where('name', 'like', "%$request->search%")->paginate(24);
+        $priceMin = $products->min('price');
+        $priceMax =  $products->max('price');
         $subCats = Category::all();
-         return view('front-end.shop', \compact( 'products', 'subCats' ));
+         return view('front-end.shop', \compact( 'products', 'subCats', 'priceMin', 'priceMax' ));
     }
               // mail add
               
