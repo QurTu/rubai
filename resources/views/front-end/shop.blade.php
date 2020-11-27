@@ -34,10 +34,10 @@
 							@endif
 
                 </div>
-                <div class="price-filer">
+                <!-- <div class="price-filer">
                     <h2>Kainos filtras:</h2>
                     <input type="text" id="sampleSlider" />
-                </div>
+                </div> -->
 
 
 
@@ -144,10 +144,9 @@
     </script>
 
 
-    <script src="{{ asset('frontend/range-slider/js/rSlider.min.js')}}"></script>
+    <!-- <script src="{{ asset('frontend/range-slider/js/rSlider.min.js')}}"></script>
     <script>
-        let minVal = <?php echo json_decode( $priceMin ) ?>;
-        let maxVal = <?php echo json_decode( $priceMax ) ?>;
+       
      
 
         var mySlider = new rSlider({
@@ -175,7 +174,9 @@
                 if (x >= values[0] && x <= values[1]) {}
             }
         });
-    </script>
+    </script> -->
+
+
 
     <script>
         $(document).ready(function() {
