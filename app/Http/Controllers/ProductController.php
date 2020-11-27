@@ -141,8 +141,10 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
                  $image_full_name = $product->image;
                  $uplode_path = public_path("images\\");
-                 $image_url =$uplode_path . $image_full_name;
-                 unlink($image_url);
+                 $image_url =$uplode_path . $image_full_name;              
+                 if(file_exists($image_url)){
+                    unlink($image_url);
+                }
             $ext =  $request->file('image')->getClientOriginalName();
             $image_name = date('dmy_H_s_i');
             $image_full_name = $image_name . '.' .$ext;
