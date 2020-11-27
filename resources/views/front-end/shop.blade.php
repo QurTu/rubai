@@ -14,17 +14,9 @@
 									
 									<a href="{{route('search.subcategory', $subC->id )}}">{{$subC->name}}</a>
 										@endforeach
-							@elseif(Route::current()->getName() == 'search.subcategory')	
-							@foreach($subCats as $subC)
-								
-									<a href="{{route('search.subsubcategory', $subC->id )}}">{{$subC->name}}</a>
-										@endforeach
+							
 
-										@elseif(Route::current()->getName() == 'search.subsubcategory')	
-							@foreach($subCats as $subC)
-								
-									<a href="{{route('search.subsubcategory', $subC->id )}}">{{$subC->name}}</a>
-										@endforeach
+									
 										
 							@else
 							@foreach($categories as $subC)

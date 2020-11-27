@@ -264,8 +264,10 @@ class HomeController extends Controller
         $priceMax =  $products->max('price');
         return view('front-end.shop', \compact( 'products', 'subCats' , 'priceMin', 'priceMax'));
     }
+
+    
     public function searchSubSubCat($id) {
-        $subCats = SubSubCategory::where('sub_category_id' , $id)->get();
+        $subCats = SubSubCategory::where('sub_category_id' , 55555)->get();
         $products = Product::where('sub_sub_category_id', $id)->paginate(24);
         $priceMin = $products->min('price');
         $priceMax =  $products->max('price');
