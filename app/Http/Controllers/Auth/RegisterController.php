@@ -78,7 +78,6 @@ class RegisterController extends Controller
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
-        $user->role_id = 2;
         $user->save();
         $id = $user->id;
         Cart::instance('cart');

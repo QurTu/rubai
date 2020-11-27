@@ -18,5 +18,8 @@ class RolesTablesSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => 'user'
         ]);
+        DB::table('roles')->insert([
+            'name' => 'balvon'
+        ]);
     }
 }
