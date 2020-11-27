@@ -23,7 +23,6 @@ class CategoryComposer
     {
 
         $view->with([
-            'recentlyViewedProducts' => \RecentlyViewed\Facades\RecentlyViewed::get(Product::class),
              'categories'=>  Category::all(),
               'subCategories' => SubCategory::all(), 
               'subSubCategories'=>SubSubCategory::all(),
