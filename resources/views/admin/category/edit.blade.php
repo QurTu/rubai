@@ -9,7 +9,7 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Name</th>
+      <th scope="col">Pavadinimas</th>
       <th scope="col">actions</th>
      
     </tr>
