@@ -5,7 +5,7 @@
 @section('content')
 
  <!-- CONTENT section START-->
-
+   @if($shipping->isNotEmpty())
  <div class="container shipping-add">
         <form action="{{route('shipping.fromList')}}" method="post" class="needs-validation" novalidate>
 			@csrf
@@ -42,6 +42,10 @@
         </form>
     </div>
 
+
+ 
+
+@endif
 
 
 

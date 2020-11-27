@@ -50,11 +50,11 @@ class CartController extends Controller
             $data['options'][$key] = $value;
            }
           }
-            Cart::destroy();
+            Cart::instance('cart')->destroy();
             Cart::instance('cart')->add($data);
-            Cart::instance('cart')->merge(Auth::id());
-             Cart::erase( Auth::id());   
-             Cart::instance('cart')->store( Auth::id());        
+           Cart::instance('cart')->merge(Auth::id());
+           Cart::instance('cart')->erase( Auth::id());
+           Cart::instance('cart')->store( Auth::id());        
              $notification=array(
                 'messege'=>'Successfully Added on your Cart!',
                 'alert-type'=>'success'
@@ -69,4 +69,33 @@ class CartController extends Controller
       Cart::instance('cart')->store( Auth::id()); 
       return \redirect()->back();
     }
+
+
+    public function cartItemMinus( $rowId ) {
+      
+     $cartItem = Cart::instance('cart')->get($rowId);
+     $qnt = 1;
+     if($cartItem->qty > 1) {
+       $qnt = $cartItem->qty - 1 ;
+     }
+     $price = $cartItem->price *$qnt;
+      Cart::instance('cart')->update($rowId, $qnt );
+      Cart::instance('cart')->erase( Auth::id());
+      Cart::instance('cart')->store( Auth::id()); 
+      $total = Cart::instance('cart')->subtotal();
+      return \Response::json([ 'qty' => $qnt, 'price' => $price, 'rowId' => $rowId, 'total' => $total,   ]);
+    }
+
+
+    public function cartItemPlius($rowId ) {
+      $cartItem = Cart::instance('cart')->get($rowId);
+        $qnt = $cartItem->qty +1 ;
+      $price = $cartItem->price *$qnt;
+       Cart::instance('cart')->update($rowId, $qnt );
+       Cart::instance('cart')->erase( Auth::id());
+       Cart::instance('cart')->store( Auth::id()); 
+       $total = Cart::instance('cart')->subtotal();
+       return \Response::json([ 'qty' => $qnt, 'price' => $price, 'rowId' => $rowId, 'total' => $total,   ]);
+     }
+    
 }

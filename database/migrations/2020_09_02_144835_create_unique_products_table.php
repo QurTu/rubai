@@ -17,7 +17,7 @@ class CreateUniqueProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-           $table->json('variants');
+           $table->text('variants');
             $table->integer('qnt');
             $table->timestamps();
         });

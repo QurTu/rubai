@@ -3,74 +3,79 @@
 @section('content')
 
 
-<div class="contact_info">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1">
-					<div class="contact_info_container d-flex flex-lg-row flex-column justify-content-between align-items-between">
 
-						<!-- Contact Item -->
-						<div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-							<div class="contact_info_image"><img src="images/contact_1.png" alt=""></div>
-							<div class="contact_info_content">
-								<div class="contact_info_title">Phone</div>
-								<div class="contact_info_text">+38 068 005 3570</div>
-							</div>
-						</div>
+<form action="/action_page.php">
+        <input type="radio" name="vehicle" value="Bike">
 
-						<!-- Contact Item -->
-						<div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-							<div class="contact_info_image"><img src="images/contact_2.png" alt=""></div>
-							<div class="contact_info_content">
-								<div class="contact_info_title">Email</div>
-								<div class="contact_info_text">fastsales@gmail.com</div>
-							</div>
-						</div>
 
-						<!-- Contact Item -->
-						<div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-							<div class="contact_info_image"><img src="images/contact_3.png" alt=""></div>
-							<div class="contact_info_content">
-								<div class="contact_info_title">Address</div>
-								<div class="contact_info_text">10 Suffolk at Soho, London, UK</div>
-							</div>
-						</div>
+    </form>
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container shipping-add">
+        <h1>Susitiekite su mumis:</h1>
 
-	<!-- Contact Form -->
+        <form class="needs-validation" action="{{route('shipping.add')}}" method="post" novalidate>
+			@csrf
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">Vardas</label>
+                    <input type="text" name='name' class="form-control" id="validationCustom01" placeholder="vardas" value="" required>
 
-	<div class="contact_form">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1">
-					<div class="contact_form_container">
-						<div class="contact_form_title">Get in Touch</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Elektroninis paštas</label>
+                    <input type="text" name='email' class="form-control" id="validationCustom06" placeholder="Elektroninis paštas" value="" required>
+                </div>
 
-						  <form id="contact_form" action="{{route('mail.create')}}" method="post">
-							<div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
-								<input type="text" name='name' id="contact_form_name" class="contact_form_name input_field" placeholder="Your name" required="required" data-error="Name is required.">
-								<input type="text" name='email' id="contact_form_email" class="contact_form_email input_field" placeholder="Your email" required="required" data-error="Email is required.">
-								<input type="text" name='phoneNumber' id="contact_form_phone" class="contact_form_phone input_field" placeholder="Your phone number">
-							</div>
-							<div class="contact_form_text">
-								<textarea id="contact_form_message" name='message' class="text_field contact_form_message" name="message" rows="4" placeholder="Message" required="required" data-error="Please, write us a message."></textarea>
-							</div> 
-							@csrf
-							<div class="contact_form_button">
-								<button type="submit" class="button contact_submit_button">Send Message</button>
-							</div>
-						</form>
 
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="panel"></div>
-	</div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Telefono numeris</label>
+                    <input type="text" name='phone' class="form-control" placeholder="telefono numeris" value="">
 
+                </div>
+
+
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-12 mb-3">
+                    <label for="validationCustom03">Žinutė</label>
+                    <textarea name="message" id="" cols="30" class="form-control" id="validationCustom03" placeholder="žinutė" required rows="10"></textarea>
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <button class="buy-button" type="submit">Siųsti Žinutę</button>
+        </form>
+    </div>
+
+
+@endsection
+@section('scripts')
+<script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 @endsection

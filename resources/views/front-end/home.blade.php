@@ -37,7 +37,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
                 </div>
-                <div class="modal-body">
+                   <div class="modal-body">
 
                     <h1>Ačiū, kad pirkote!!!</h1>
                 </div>
