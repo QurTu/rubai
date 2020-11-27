@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+    
         Schema::defaultStringLength(191);
+        
     }
 
     /**
@@ -26,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        If (env('APP_ENV') !== 'local') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
         View::composer(
             ['front-end.*'],
             'App\Http\View\Composers\CategoryComposer'
